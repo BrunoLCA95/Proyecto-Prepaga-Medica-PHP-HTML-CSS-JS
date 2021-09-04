@@ -212,6 +212,14 @@
         $vpP=$CosE-$vpC;
 
 
+        $sql_NPaciente= 'select Numero from factura order by Numero desc limit 1;';
+        $gsent = $pdo->prepare($sql_NPaciente);
+        $gsent->execute();
+        $resultado=$gsent->fetchAll();
+        foreach ($resultado as $dato)
+        $NumF=$dato['Numero'];
+        $NumF=$NumF+1;
+
 
 
         ?>
@@ -372,7 +380,7 @@
                                 <label for="disabledTextInput" class="form-label">Factura N°</label>
                             </div>
                             <div class="col-auto">
-                                <input type="text" id="paciente" class="form-control" placeholder="ac">
+                                <input type="text" id="paciente" class="form-control" value="<?php echo $NumF; ?>">
                             </div>
                         </fieldset>
                     </form>
