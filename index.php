@@ -33,7 +33,7 @@
                         Facturar
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Nueva Factura</a></li>
+                        <li><a class="dropdown-item" onclick="myFunction()" href="#">Nueva Factura</a></li>
                     </ul>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#">Buscar Factura</a></li>
@@ -100,8 +100,7 @@
 
 
 
-    
-    <div class="container form-control p divP">
+    <div class="container form-control p divP" id="myDIV">
 
 
         <!--FORMULARIO-->
@@ -424,6 +423,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
         crossorigin="anonymous"></script>
+
+    <script src="js/nuevo.js"></script>
 </body>
 
 </html>
