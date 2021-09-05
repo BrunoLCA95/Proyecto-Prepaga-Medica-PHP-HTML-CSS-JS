@@ -501,65 +501,65 @@
 
         ?>
         
-<div class="container form-control p divP" id="ocultarRegN">
-        <div class="container form-control p" style="background-color:#ADD8E6">
-            <label for="">Nuevo Registro Medico</label>
-        </div>
-        <div class="container form-control p" style="background-color:#ADD8E6">
-            <form action="" method="GET">
-                <div class="row g-2 align-items-center">
-                    <div class="col form-control">
-                        <label for="">N° de Paciente: </label>
-                        <input type="text" class="form-control" name="FSpas">
-                    </div >
-                    
-                    <div class="col form-control">
-                        <label for="">Medico:</label>
-                        <select class="form-control" name="medico" id="">       
+    <div class="container form-control p divP" id="ocultarRegN">
+            <div class="container form-control p" style="background-color:#ADD8E6">
+                <label for="">Nuevo Registro Medico</label>
+            </div>
+            <div class="container form-control p" style="background-color:#ADD8E6">
+                <form action="" method="GET">
+                    <div class="row g-2 align-items-center">
+                        <div class="col form-control">
+                            <label for="">N° de Paciente: </label>
+                            <input type="text" class="form-control" name="FSpas">
+                        </div >
+                        
+                        <div class="col form-control">
+                            <label for="">Medico:</label>
+                            <select class="form-control" name="medico" id="">       
 
-                            <?php
+                                <?php
 
-                            foreach ($resultado as $dato):
-                                $idMedi=$dato['NMedico'];
-                                $NombMedi=$dato['nombre'];
-                                echo "<option value='$idMedi'>$NombMedi</option>";
+                                foreach ($resultado as $dato):
+                                    $idMedi=$dato['NMedico'];
+                                    $NombMedi=$dato['nombre'];
+                                    echo "<option value='$idMedi'>$NombMedi</option>";
 
-                            endforeach;
+                                endforeach;
 
-                            ?>
+                                ?>
 
-                        </select>
+                            </select>
+                        </div>
+
+                        <div class="col form-control">
+                            <label for="">Tipo de Examen:</label>
+
+                            <select class="form-control" name="tipoExamen " id="">       
+
+                                <?php
+
+                                foreach ($resultado1 as $dato):
+                                    $idTipo=$dato['id'];
+                                    $NombTipo=$dato['tipoExamen'];
+                                    echo "<option value='$idTipo'>$NombTipo</option>";
+
+                                endforeach;
+
+                                ?>
+
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center botonG">
+                        <input type="submit" class="btn btn-primary" value="Guardar">
                     </div>
 
-                    <div class="col form-control">
-                        <label for="">Tipo de Examen:</label>
+                </form>
 
-                        <select class="form-control" name="tipoExamen " id="">       
-
-                            <?php
-
-                            foreach ($resultado1 as $dato):
-                                $idTipo=$dato['id'];
-                                $NombTipo=$dato['tipoExamen'];
-                                echo "<option value='$idTipo'>$NombTipo</option>";
-
-                            endforeach;
-
-                            ?>
-
-                        </select>
-
-                    </div>
-                </div>
-                <div class="row g-3 align-items-center botonG">
-                    <input type="submit" class="btn btn-primary" value="Guardar">
-                </div>
-
-            </form>
-
+            </div>
+            
         </div>
-        
-    </div>
 
     
 
