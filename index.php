@@ -67,7 +67,7 @@
                         Registro de Examen
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Nuevo</a></li>
+                        <li><a class="dropdown-item" onclick="ocultarREN()" href="#" >Nuevo</a></li>
                         <li><a class="dropdown-item" href="#">Modificar</a></li>
                         <li><a class="dropdown-item" href="#">Eliminar</a></li>
                         <li><a class="dropdown-item" href="#">Buscar</a></li>
@@ -417,6 +417,7 @@
     </div>
 <!--Fin Formularios Factura -->
 
+
 <!--Formularios Seguro -->
         <?php
         $idComp;
@@ -475,10 +476,89 @@
     </div>
 
     <!--Modificar Formulario de Seguro -->
+<!--Fin formularios de seguro -->
 
 
+<!--Formularios Registro de Examen -->
+        <?php
+        $idMedi;
+        $NombMedi;
+        $idTipo;
+        $NombTipo;
 
 
+        $sql_NPaciente= 'select NMedico,nombre from medico;';
+        $gsent = $pdo->prepare($sql_NPaciente);
+        $gsent->execute();
+        $resultado=$gsent->fetchAll();
+
+        $sql_NPaciente1= 'select id,tipoExamen from practicap.catalogotarifa;';
+        $gsent1 = $pdo->prepare($sql_NPaciente1);
+        $gsent1->execute();
+        $resultado1=$gsent1->fetchAll();
+ 
+
+
+        ?>
+<div class="container form-control p divP" id="ren">
+        <div class="container form-control p" style="background-color:#ADD8E6">
+            <label for="">Nuevo Registro Medico</label>
+        </div>
+        <div class="container form-control p" style="background-color:#ADD8E6">
+            <form action="" method="GET">
+                <div class="row g-2 align-items-center">
+                    <div class="col form-control">
+                        <label for="">N° de Paciente: </label>
+                        <input type="text" class="form-control" name="FSpas">
+                    </div >
+                    
+                    <div class="col form-control">
+                        <label for="">Medico:</label>
+                        <select class="form-control" name="medico" id="">       
+
+                            <?php
+
+                            foreach ($resultado as $dato):
+                                $idMedi=$dato['NMedico'];
+                                $NombMedi=$dato['nombre'];
+                                echo "<option value='$idMedi'>$NombMedi</option>";
+
+                            endforeach;
+
+                            ?>
+
+                        </select>
+                    </div>
+
+                    <div class="col form-control">
+                        <label for="">Tipo de Examen:</label>
+
+                        <select class="form-control" name="tipoExamen " id="">       
+
+                            <?php
+
+                            foreach ($resultado1 as $dato):
+                                $idTipo=$dato['id'];
+                                $NombTipo=$dato['tipoExamen'];
+                                echo "<option value='$idTipo'>$NombTipo</option>";
+
+                            endforeach;
+
+                            ?>
+
+                        </select>
+
+                    </div>
+                </div>
+                <div class="row g-3 align-items-center botonG">
+                    <input type="submit" class="btn btn-primary" value="Guardar">
+                </div>
+
+            </form>
+
+        </div>
+        
+    </div>
 
     
 

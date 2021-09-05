@@ -15,3 +15,12 @@ function ocultarFSN() {
         x.style.display = "none";
     }
 }
+
+function ocultarREN() {
+    var x = document.getElementById("ren");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
