@@ -1,19 +1,41 @@
+var bnb = document.getElementById("bnb");
+var bnb1 = document.getElementById("bnb1");
+var bnb2 = document.getElementById("bnb2");
+
+
+var factura = document.getElementById("factura");
+var ocultarFS1 = document.getElementById("fsn");
+
+function mostrarBnB() {
+    bnb.style.display = "block";
+    bnb1.style.display = "block";
+    bnb2.style.display = "block";
+    factura.style.display = "none";
+    ocultarFS1.style.display = "none";
+}
+
 function ocultarFactura() {
-    var x = document.getElementById("factura");
-    if (x.style.display === "none") {
-        x.style.display = "block";
+    
+    if (factura.style.display === "none") {
+        factura.style.display = "block";
     } else {
-        x.style.display = "none";
+        factura.style.display = "none";
     }
+    bnb.style.display = "none";
+    bnb1.style.display = "none";
+    bnb2.style.display = "none";
 }
 
 function ocultarFSN() {
-    var x = document.getElementById("fsn");
-    if (x.style.display === "none") {
-        x.style.display = "block";
+    
+    if (ocultarFS1.style.display === "none") {
+        ocultarFS1.style.display = "block";
     } else {
-        x.style.display = "none";
+        ocultarFS1.style.display = "none";
     }
+    bnb.style.display = "none";
+    bnb1.style.display = "none";
+    bnb2.style.display = "none";
 }
 
 function ocultarRegN() {
@@ -23,4 +45,7 @@ function ocultarRegN() {
     } else {
         z.style.display = "none";
     }
+    bnb.style.display = "none";
+    bnb1.style.display = "none";
+    bnb2.style.display = "none";
 }

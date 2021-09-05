@@ -22,7 +22,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.php">Inicio</a>
+                    <a class="nav-link active" aria-current="page" onclick="mostrarBnB()" href="index.php">Inicio</a>
                 </li>
 
 
@@ -97,13 +97,13 @@
 </nav>
 
 <body>
-<div class="inicio">
+<div class="inicio" id="bnb">
     <p>Bienvenid@</p>
 </div>
-<div class="inicio2">
+<div class="inicio2" id="bnb1">
     <p>Proyecto de servicios de cobranzas y comprobantes de prepaga medica</p>
 </div>
-<div class="inicio3">
+<div class="inicio3" id="bnb2">
     <p>Bruno L Cosimano Abadie</p>
 </div>
 <!--FOrmularios Factura -->
