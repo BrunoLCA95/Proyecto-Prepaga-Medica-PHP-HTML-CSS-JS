@@ -431,7 +431,7 @@
 
 
         ?>
-
+    <!--Nuevo Formulario de Seguro -->
     <div class="container form-control p divP" id="fsn">
         <div class="container form-control p" style="background-color:#ADD8E6">
             <label for="">Nuevo Formulario de Seguro</label>
@@ -473,6 +473,16 @@
         </div>
         
     </div>
+
+    <!--Modificar Formulario de Seguro -->
+
+
+
+
+
+    
+
+
 
 
 
