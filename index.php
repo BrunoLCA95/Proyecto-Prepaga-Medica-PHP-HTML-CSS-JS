@@ -447,21 +447,18 @@
                     <div class="col form-control">
                         <label for="">Nombre Compañia de Seguro:</label>
 
-                        <select class="form-control" name="compañia " id="">
-                        
-                        
-                        
+                        <select class="form-control" name="compañia " id="">       
 
-                        <?php
+                            <?php
 
-                        foreach ($resultado as $dato):
-                            $idComp=$dato['idCompanias'];
-                            $NombComp=$dato['Nombre'];
-                            echo "<option value='$idComp'>$NombComp</option>";
+                            foreach ($resultado as $dato):
+                                $idComp=$dato['idCompanias'];
+                                $NombComp=$dato['Nombre'];
+                                echo "<option value='$idComp'>$NombComp</option>";
 
-                        endforeach;
+                            endforeach;
 
-                        ?>
+                            ?>
 
                         </select>
 
