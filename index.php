@@ -97,8 +97,15 @@
 </nav>
 
 <body>
-
-
+<div class="inicio">
+    <p>Bienvenid@</p>
+</div>
+<div class="inicio2">
+    <p>Proyecto de servicios de cobranzas y comprobantes de prepaga medica</p>
+</div>
+<div class="inicio3">
+    <p>Bruno L Cosimano Abadie</p>
+</div>
 <!--FOrmularios Factura -->
     <div class="container form-control p divP" id="factura">
         <div class="container form-control p" style="background-color:#ADD8E6">
@@ -573,6 +580,8 @@
         crossorigin="anonymous"></script>
 
     <script src="js/nuevo.js"></script>
+
+
 </body>
 
 </html>
