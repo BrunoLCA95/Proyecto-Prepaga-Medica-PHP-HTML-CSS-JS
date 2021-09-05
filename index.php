@@ -50,7 +50,7 @@
                         Formularios de Seguro
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Nuevo</a></li>
+                        <li><a class="dropdown-item" onclick="ocultarFSN()" href="#">Nuevo</a></li>
                         <li><a class="dropdown-item" href="#">Modificar</a></li>
                         <li><a class="dropdown-item" href="#">Eliminar</a></li>
                         <li><a class="dropdown-item" href="#">Buscar</a></li>
@@ -416,7 +416,27 @@
 
 <!--Formularios Seguro -->
 
-    <div class="container form-control p divP">
+    <div class="container form-control p divP" id="fsn">
+        <div class="container form-control p" style="background-color:#ADD8E6">
+            <form action="" method="GET">
+                <div class="row g-2 align-items-center">
+                    <div class="col form-control">
+                        <label for="">N° de Paciente: </label>
+                        <input type="text" class="form-control" name="FSpas">
+                    </div>
+
+                    <div class="col form-control">
+                        <label for="">Nombre Compañia de Seguro:</label>
+                        <input type="text" class="form-control" name="FSseg">
+                    </div>
+                </div>
+                <div class="row g-3 align-items-center">
+                    <input type="submit" class="btn btn-primary" value="Guardar">
+                </div>
+
+            </form>
+
+        </div>
         
     </div>
 
