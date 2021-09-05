@@ -14,3 +14,10 @@
     background-color: rgb(130, 132, 134);
   }
 
+  .botonG {
+    align-items: center;
+    margin: 3px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+

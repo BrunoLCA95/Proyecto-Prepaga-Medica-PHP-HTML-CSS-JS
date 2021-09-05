@@ -101,6 +101,9 @@
 
 <!--FOrmularios Factura -->
     <div class="container form-control p divP" id="factura">
+        <div class="container form-control p" style="background-color:#ADD8E6">
+            <label for="">Nueva Factura</label>
+        </div>
 
 
         <!--FORMULARIO-->
@@ -415,8 +418,24 @@
 <!--Fin Formularios Factura -->
 
 <!--Formularios Seguro -->
+        <?php
+        $idComp;
+        $NombComp;
+
+
+        $sql_NPaciente= 'select idCompanias, Nombre from listadocompanias;';
+        $gsent = $pdo->prepare($sql_NPaciente);
+        $gsent->execute();
+        $resultado=$gsent->fetchAll();
+        foreach ($resultado as $dato)
+
+
+        ?>
 
     <div class="container form-control p divP" id="fsn">
+        <div class="container form-control p" style="background-color:#ADD8E6">
+            <label for="">Nuevo Formulario de Seguro</label>
+        </div>
         <div class="container form-control p" style="background-color:#ADD8E6">
             <form action="" method="GET">
                 <div class="row g-2 align-items-center">
@@ -427,10 +446,28 @@
 
                     <div class="col form-control">
                         <label for="">Nombre Compañia de Seguro:</label>
-                        <input type="text" class="form-control" name="FSseg">
+
+                        <select class="form-control" name="compañia " id="">
+                        
+                        
+                        
+
+                        <?php
+
+                        foreach ($resultado as $dato):
+                            $idComp=$dato['idCompanias'];
+                            $NombComp=$dato['Nombre'];
+                            echo "<option value='$idComp'>$NombComp</option>";
+
+                        endforeach;
+
+                        ?>
+
+                        </select>
+
                     </div>
                 </div>
-                <div class="row g-3 align-items-center">
+                <div class="row g-3 align-items-center botonG">
                     <input type="submit" class="btn btn-primary" value="Guardar">
                 </div>
 
