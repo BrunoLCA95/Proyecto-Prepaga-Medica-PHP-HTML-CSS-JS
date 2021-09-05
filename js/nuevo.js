@@ -1,5 +1,5 @@
-function myFunction() {
-    var x = document.getElementById("myDIV");
+function ocultarFactura() {
+    var x = document.getElementById("factura");
     if (x.style.display === "none") {
         x.style.display = "block";
     } else {

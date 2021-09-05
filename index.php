@@ -33,7 +33,7 @@
                         Facturar
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" onclick="myFunction()" href="#">Nueva Factura</a></li>
+                        <li><a class="dropdown-item" onclick="ocultarFactura()" href="#">Nueva Factura</a></li>
                     </ul>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#">Buscar Factura</a></li>
@@ -99,8 +99,8 @@
 <body>
 
 
-
-    <div class="container form-control p divP" id="myDIV">
+<!--FOrmularios Factura -->
+    <div class="container form-control p divP" id="factura">
 
 
         <!--FORMULARIO-->
@@ -412,8 +412,9 @@
         </div>
 
     </div>
+<!--Fin Formularios Factura -->
 
-
+<!--Formularios Seguro -->
 
 
 
