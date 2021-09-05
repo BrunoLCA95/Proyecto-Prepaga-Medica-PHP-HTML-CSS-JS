@@ -16,11 +16,11 @@ function ocultarFSN() {
     }
 }
 
-function ocultarREN() {
-    var x = document.getElementById("ren");
-    if (x.style.display === "none") {
-        x.style.display = "block";
+function ocultarRegN() {
+    var z = document.getElementById("ocultarRegN");
+    if (z.style.display === "none") {
+        z.style.display = "block";
     } else {
-        x.style.display = "none";
+        z.style.display = "none";
     }
 }

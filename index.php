@@ -67,7 +67,7 @@
                         Registro de Examen
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" onclick="ocultarREN()" href="#" >Nuevo</a></li>
+                        <li><a class="dropdown-item" onclick="ocultarRegN()" href="#" >Nuevo</a></li>
                         <li><a class="dropdown-item" href="#">Modificar</a></li>
                         <li><a class="dropdown-item" href="#">Eliminar</a></li>
                         <li><a class="dropdown-item" href="#">Buscar</a></li>
@@ -500,7 +500,8 @@
 
 
         ?>
-<div class="container form-control p divP" id="ren">
+        
+<div class="container form-control p divP" id="ocultarRegN">
         <div class="container form-control p" style="background-color:#ADD8E6">
             <label for="">Nuevo Registro Medico</label>
         </div>
