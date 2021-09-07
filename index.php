@@ -125,7 +125,7 @@
                             <input type="text" id="exMedico" class="form-control" name="med">
                         </div>
                         <div class="col-auto">
-                            <input type="submit" class="btn btn-primary" value="Cargar">
+                            <input type="submit" class="btn btn-primary" onclick="mostrarBnB()" value="Cargar">
                         </div>
                     </div>
                 </form>
