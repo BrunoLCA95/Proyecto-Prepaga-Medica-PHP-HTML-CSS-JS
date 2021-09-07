@@ -8,7 +8,7 @@
     <title>Programacion 2° Noche</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link href="/css/estilos.css" rel="stylesheet" type="text/css">
+    <link href="css/estilos.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -33,7 +33,7 @@
                         Facturar
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" onclick="ocultarFactura()" href="#">Nueva Factura</a></li>
+                        <li><a class="dropdown-item" href="nuevaFactura.php">Nueva Factura</a></li>
                     </ul>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#">Buscar Factura</a></li>
@@ -108,7 +108,7 @@
         <!--FORMULARIO-->
         <div class="container form-control p" style="background-color:#ADD8E6">
             <div class="cont1">
-                <form action="index.php" method="GET">
+                <form action="nuevaFactura.php" method="GET">
                     <div class="row g-3 align-items-center">
                         <div class="col-auto">
                             <label for="inputPassword6" class="col-form-label">N° de Examen Medico</label>

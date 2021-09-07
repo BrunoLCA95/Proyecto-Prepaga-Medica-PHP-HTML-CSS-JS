@@ -33,7 +33,7 @@
                         Facturar
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" onclick="ocultarFactura()" href="#">Nueva Factura</a></li>
+                        <li><a class="dropdown-item" href="nuevaFactura.php">Nueva Factura</a></li>
                     </ul>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#">Buscar Factura</a></li>
