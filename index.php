@@ -22,7 +22,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" onclick="mostrarBnB()" href="index.php">Inicio</a>
+                    <!--<a class="nav-link active" aria-current="page" onclick="mostrarBnB()" href="#">Inicio</a>-->
+                    <a class="nav-link active" aria-current="page" onclick="mostrarBnB()" href="#">Inicio</a>
                 </li>
 
 
@@ -33,7 +34,7 @@
                         Facturar
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="nuevaFactura.php">Nueva Factura</a></li>
+                        <li><a class="dropdown-item" onclick="ocultarFactura()" href="#">Nueva Factura</a></li>
                     </ul>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#">Buscar Factura</a></li>
@@ -96,16 +97,17 @@
     </div>
 </nav>
 
-<body>
-<div class="inicio" id="bnb">
+<body document.onload = mostrarB>
+<div class="inicio container" id="bnb">
     <p>Bienvenid@</p>
 </div>
-<div class="inicio2" id="bnb1">
+<div class="inicio2 container" id="bnb1">
     <p>Proyecto de servicios de cobranzas y comprobantes de prepaga medica</p>
 </div>
-<div class="inicio3" id="bnb2">
+<div class="inicio3 container" id="bnb2">
     <p>Bruno L Cosimano Abadie</p>
 </div>
+
 <!--FOrmularios Factura -->
     <div class="container form-control p divP" id="factura">
         <div class="container form-control p" style="background-color:#ADD8E6">
@@ -125,7 +127,7 @@
                             <input type="text" id="exMedico" class="form-control" name="med">
                         </div>
                         <div class="col-auto">
-                            <input type="submit" class="btn btn-primary" onclick="mostrarBnB()" value="Cargar">
+                            <input type="submit" class="btn btn-primary" onclick="ocultarTodoMF()" value="Cargar">
                         </div>
                     </div>
                 </form>
