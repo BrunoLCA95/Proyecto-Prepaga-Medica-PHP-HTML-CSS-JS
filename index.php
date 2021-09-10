@@ -97,7 +97,7 @@
     </div>
 </nav>
 
-<body document.onload = mostrarB>
+<body >
 <div class="inicio container" id="bnb">
     <p>Bienvenid@</p>
 </div>
@@ -570,7 +570,57 @@
             
         </div>
 
+<!-- fin formulario Registro de Examen -->
+
+
+<!-- Formularios Paciente -->
+        <?php
+        $sql_NPaciente= 'select NPaciente from paciente order by NPaciente desc limit 1;';
+        $gsent = $pdo->prepare($sql_NPaciente);
+        $gsent->execute();
+        $resultado=$gsent->fetchAll();
+        foreach ($resultado as $dato)
+        $NumPaciente=$dato['NPaciente'];
+        $NumPaciente=$NumPaciente+1;
+
+
+
+        ?>
     
+        <div class="container form-control p divP" style="display:block;">
+            <div class="container form-control p" style="background-color:#ADD8E6">
+                <label for="">Nuevo Registro de Paciente</label>
+            </div>
+            <div class="container form-control p" style="background-color:#ADD8E6">
+                <form action="nPaciente.php" method="GET">
+                    <div class="row g-2 align-items-center">
+                        <div class="col form-control">
+                            <label for="">Nombre de Paciente: </label>
+                            <input type="text" class="form-control" name="FSpas">
+                        </div >
+                        <div class="col form-control">
+                            <label for="">Direccion del Paciente</label>
+                            <input type="text" class="form-control" name="FSpas">
+                        </div> 
+                    </div>
+                    <div class="row g-2 align-items-center">
+                        <div class="col form-control">
+                            <fieldset disabled>
+                                <label for="">N° de Paciente : </label>
+                                <input type="text" id="paciente" class="form-control" value="<?php echo $NumPaciente;?>">
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center botonG">
+                        <input type="submit" class="btn btn-primary" value="Guardar">
+                    </div>
+
+                </form>
+
+            </div>
+            
+        </div>
+
 
 
 
