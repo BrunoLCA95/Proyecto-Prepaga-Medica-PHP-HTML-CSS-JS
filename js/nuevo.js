@@ -39,7 +39,7 @@ function mostrarBnB() {
         factura.style.display= "none";
     }else{
         factura.style.display= "block";
-        
+        factura.style.display= "none";
     }
 
     
@@ -91,4 +91,14 @@ function ocultarRegN() {
     bnb.style.display = "none";
     bnb1.style.display = "none";
     bnb2.style.display = "none";
+}
+
+
+function mostrarF () {
+    if (factura.style.display === "none") {
+        factura.style.display= "block";
+        bnb.style.display = "none";
+        bnb1.style.display = "none";
+        bnb2.style.display = "none";
+    }
 }

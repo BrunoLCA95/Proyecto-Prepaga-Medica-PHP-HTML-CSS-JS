@@ -52,7 +52,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" onclick="ocultarFSN()" href="#">Nuevo</a></li>
-                        <li><a class="dropdown-item" href="#">Modificar</a></li>
+                        <li><a class="dropdown-item" onclick="mostrarF()"  href="#">Modificar</a></li>
                         <li><a class="dropdown-item" href="#">Eliminar</a></li>
                         <li><a class="dropdown-item" href="#">Buscar</a></li>
                     </ul>
@@ -109,7 +109,7 @@
 </div>
 
 <!--FOrmularios Factura -->
-    <div class="container form-control p divP" id="factura">
+    <div class="container form-control p divP" id="factura" style="display:none;">
         <div class="container form-control p" style="background-color:#ADD8E6">
             <label for="">Nueva Factura</label>
         </div>
@@ -118,7 +118,7 @@
         <!--FORMULARIO-->
         <div class="container form-control p" style="background-color:#ADD8E6">
             <div class="cont1">
-                <form action="index.php" method="GET">
+                <form action="factura.php" method="GET">
                     <div class="row g-3 align-items-center">
                         <div class="col-auto">
                             <label for="inputPassword6" class="col-form-label">N° de Examen Medico</label>
@@ -127,7 +127,7 @@
                             <input type="text" id="exMedico" class="form-control" name="med">
                         </div>
                         <div class="col-auto">
-                            <input type="submit" class="btn btn-primary" onclick="ocultarTodoMF()" value="Cargar">
+                            <input type="submit" class="btn btn-primary" onclick="mostrarF();" value="Cargar">
                         </div>
                     </div>
                 </form>
@@ -442,12 +442,12 @@
 
         ?>
     <!--Nuevo Formulario de Seguro -->
-    <div class="container form-control p divP" id="fsn">
+    <div class="container form-control p divP" id="fsn" style="display:none;">
         <div class="container form-control p" style="background-color:#ADD8E6">
             <label for="">Nuevo Formulario de Seguro</label>
         </div>
         <div class="container form-control p" style="background-color:#ADD8E6">
-            <form action="" method="GET">
+            <form action="nformSeg.php" method="GET">
                 <div class="row g-2 align-items-center">
                     <div class="col form-control">
                         <label for="">N° de Paciente: </label>
@@ -510,12 +510,12 @@
 
         ?>
         
-    <div class="container form-control p divP" id="ocultarRegN">
+    <div class="container form-control p divP" id="ocultarRegN" style="display:none;">
             <div class="container form-control p" style="background-color:#ADD8E6">
                 <label for="">Nuevo Registro Medico</label>
             </div>
             <div class="container form-control p" style="background-color:#ADD8E6">
-                <form action="" method="GET">
+                <form action="nRegMed.php" method="GET">
                     <div class="row g-2 align-items-center">
                         <div class="col form-control">
                             <label for="">N° de Paciente: </label>
