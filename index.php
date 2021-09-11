@@ -78,14 +78,14 @@
                 </li>
 
 
-                <!-- FORMULARIO SEGURO -->
+                <!-- FORMULARIO Paciente -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Pacientes
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Nuevo</a></li>
+                        <li><a class="dropdown-item" onclick="ocultarNPA()" href="#">Nuevo</a></li>
                         <li><a class="dropdown-item" href="#">Modificar</a></li>
                         <li><a class="dropdown-item" href="#">Buscar</a></li>
                     </ul>
@@ -587,7 +587,7 @@
 
         ?>
     
-        <div class="container form-control p divP" style="display:block;">
+        <div class="container form-control p divP" style="display:none;" id="npaciente">
             <div class="container form-control p" style="background-color:#ADD8E6">
                 <label for="">Nuevo Registro de Paciente</label>
             </div>
@@ -596,11 +596,11 @@
                     <div class="row g-2 align-items-center">
                         <div class="col form-control">
                             <label for="">Nombre de Paciente: </label>
-                            <input type="text" class="form-control" name="FSpas">
+                            <input type="text" class="form-control" name="NombreP">
                         </div >
                         <div class="col form-control">
                             <label for="">Direccion del Paciente</label>
-                            <input type="text" class="form-control" name="FSpas">
+                            <input type="text" class="form-control" name="DireccionP">
                         </div> 
                     </div>
                     <div class="row g-2 align-items-center">
@@ -622,9 +622,23 @@
         </div>
 
 
+        <?php
+
+        $nPaciente=$_GET("NombreP");
+        $dPaciente=$_GET("DireccionP");
+
+        $sql_NPaciente= 'insert into paciente (nombre,direccion) values ("'.$nPaciente.'","'.$dPaciente.'");';
+        $gsent = $pdo->prepare($sql_NPaciente);
+        $gsent->execute();
 
 
 
+
+        ?>
+
+
+
+<!-- FIN PACIENTE -->
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
