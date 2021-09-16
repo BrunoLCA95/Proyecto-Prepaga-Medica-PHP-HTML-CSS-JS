@@ -109,6 +109,15 @@
         $NombComp;
 
 
+        $NumP=$_GET["FSpas"];
+        $NumComp=$_GET['comp'];
+
+        $sql_NPaciente= 'insert into formaseguro (NPaciente,Compañia) values ('.$NumP.','.$NumComp.');';
+        $gsent = $pdo->prepare($sql_NPaciente);
+        $gsent->execute();
+
+
+
         $sql_NPaciente= 'select idCompanias, Nombre from listadocompanias;';
         $gsent = $pdo->prepare($sql_NPaciente);
         $gsent->execute();
@@ -133,14 +142,14 @@
                     <div class="col form-control">
                         <label for="">Nombre Compañia de Seguro:</label>
 
-                        <select class="form-control" name="compañia " id="">       
+                        <select class="form-control" name="comp">       
 
                             <?php
 
                             foreach ($resultado as $dato):
                                 $idComp=$dato['idCompanias'];
                                 $NombComp=$dato['Nombre'];
-                                echo "<option value='$idComp'>$NombComp</option>";
+                                echo "<option value='".$idComp."'>".$NombComp."</option>";
 
                             endforeach;
 
@@ -159,6 +168,10 @@
         </div>
         
     </div>
+
+
+
+
 
     <!--Modificar Formulario de Seguro -->
 <!--Fin formularios de seguro -->

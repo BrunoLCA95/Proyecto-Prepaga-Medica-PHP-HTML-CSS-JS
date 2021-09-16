@@ -104,6 +104,15 @@
         <?php
         error_reporting(0);
         include_once 'conexion.php';
+
+        $sql_NPaciente= 'insert into examen (NMedico, NPaciente, TExamen) values ('.$NumMedicoP.','.$Num.','.$NumTipoP.');';
+        $gsent = $pdo->prepare($sql_NPaciente);
+        $gsent->execute();
+
+
+
+
+
         $idMedi;
         $NombMedi;
         $idTipo;
@@ -120,6 +129,11 @@
         $gsent1->execute();
         $resultado1=$gsent1->fetchAll();
  
+        $Num=$_GET["FSpas"];
+        $NumMedicoP=$_GET["medico"];
+        $NumTipoP=$_GET["tipoExamen"];
+
+
 
 
         ?>
@@ -145,7 +159,7 @@
                                 foreach ($resultado as $dato):
                                     $idMedi=$dato['NMedico'];
                                     $NombMedi=$dato['nombre'];
-                                    echo "<option value='$idMedi'>$NombMedi</option>";
+                                    echo "<option value='".$idMedi."'>$NombMedi</option>";
 
                                 endforeach;
 
@@ -157,7 +171,7 @@
                         <div class="col form-control">
                             <label for="">Tipo de Examen:</label>
 
-                            <select class="form-control" name="tipoExamen " id="">       
+                            <select class="form-control" name="tipoExamen" id="">       
 
                                 <?php
 

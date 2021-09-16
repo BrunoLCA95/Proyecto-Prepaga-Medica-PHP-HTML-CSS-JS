@@ -622,22 +622,6 @@
         </div>
 
 
-        <?php
-
-        $nPaciente=$_GET("NombreP");
-        $dPaciente=$_GET("DireccionP");
-
-        $sql_NPaciente= 'insert into paciente (nombre,direccion) values ("'.$nPaciente.'","'.$dPaciente.'");';
-        $gsent = $pdo->prepare($sql_NPaciente);
-        $gsent->execute();
-
-
-
-
-        ?>
-
-
-
 <!-- FIN PACIENTE -->
 
 
