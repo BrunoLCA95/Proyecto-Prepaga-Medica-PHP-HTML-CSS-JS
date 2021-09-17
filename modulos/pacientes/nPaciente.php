@@ -12,6 +12,7 @@
 
 </head>
 
+
 <nav class="navbar navbar-expand-lg navbar-dark barra">
     <div class="container-fluid">
         <a class="navbar-brand" href="#"><img src="/ProyectoPP/img/logo64.png" alt="" width="40" height="40"></a>
@@ -22,8 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                   
-                    <a class="nav-link active" aria-current="page" onclick="mostrarBnB()" href="#">Inicio</a>
+                    <a class="nav-link active" aria-current="page" href="/ProyectoPP/index.php">Inicio</a>
                 </li>
 
 
@@ -34,12 +34,8 @@
                         Facturar
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" onclick="ocultarFactura()" href="#">Nueva Factura</a></li>
-                    </ul>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Buscar Factura</a></li>
-                    </ul>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/factura/factura.php">Nueva Factura</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/factura/bfactura.php">Buscar Factura</a></li>                   
                     </ul>
                 </li>
 
@@ -51,10 +47,10 @@
                         Formularios de Seguro
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" onclick="ocultarFSN()" href="#">Nuevo</a></li>
-                        <li><a class="dropdown-item" onclick="mostrarF()"  href="#">Modificar</a></li>
-                        <li><a class="dropdown-item" href="#">Eliminar</a></li>
-                        <li><a class="dropdown-item" href="#">Buscar</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/formulariosS/nformSeg.php">Nuevo</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/formulariosS/mformSeg.php">Modificar</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/formulariosS/eformSeg.php">Eliminar</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/formulariosS/bformSeg.php">Buscar</a></li>
                     </ul>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     </ul>
@@ -68,7 +64,7 @@
                         Registro de Examen
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" onclick="ocultarRegN()" href="#" >Nuevo</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/registrosM/nRegMed.php">Nuevo</a></li>
                         <li><a class="dropdown-item" href="#">Modificar</a></li>
                         <li><a class="dropdown-item" href="#">Eliminar</a></li>
                         <li><a class="dropdown-item" href="#">Buscar</a></li>
@@ -78,14 +74,14 @@
                 </li>
 
 
-                <!-- FORMULARIO Paciente -->
+                <!-- Paciente -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Pacientes
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" onclick="ocultarNPA()" href="#">Nuevo</a></li>
+                        <li><a class="dropdown-item" href="#">Nuevo</a></li>
                         <li><a class="dropdown-item" href="#">Modificar</a></li>
                         <li><a class="dropdown-item" href="#">Buscar</a></li>
                     </ul>
@@ -97,52 +93,70 @@
     </div>
 </nav>
 
+<body >
 
-<div>PRUEBA DE GRAFICA DIAGRAMA PARROT</div>
-
-
-<?php
-error_reporting(0);
-require_once ("conexion.php");
-require_once ("conf.php");
-$por_total;
-$sql_NPaciente= 'select count(TExamen)as cuenta,tipoExamen from examen,catalogotarifa where TExamen=id group by TExamen order by cuenta ASC;';
-$gsent = $pdo->prepare($sql_NPaciente);
-$gsent->execute();
-$resultado=$gsent->fetchAll();
-foreach ($resultado as $dato){
-$NumP[]=$dato['cuenta'];
-$por_total=$por_total+$dato['cuenta'];
-}
-
-$por_total=$por_total/100;
-
-foreach ($NumP as $dato){
-$arreglo[]=($dato['cuenta']/$por_total);
-$arreglo2[]=$dato['tipoExamen'];
-}
+<!-- Formularios Paciente -->
+        <?php
+        error_reporting(0);
+        include_once 'conexion.php';
+        
 
 
 
+        $nPaciente=$_GET["NombreP"];
+        $dPaciente=$_GET["DireccionP"];
 
-// Creamos la gráfica
-$pc = new C_PhpChartX(array($arreglo),'basic_chart');
-$pc->set_axes(array(
-    'xaxis'=> array('label'=>'cantidades)'),
-    'yaxis'=> array('label'=>'Datos Recolectados'),
-
-));
-
-// Efecto de gráfica en movimiento
-$pc->set_animate(true);
-// Añadimos un título a la gráfica
-$pc->set_title(array('text'=>'Grafico Prueba'));
-// Dibuja la gráfica
-$pc->draw();
+        $sql_NPaciente= 'insert into paciente (NPaciente,nombre,direccion) values ('.$NumPaciente.',"'.$nPaciente.'","'.$dPaciente.'");';
+        $gsent = $pdo->prepare($sql_NPaciente);
+        $gsent->execute();
 
 
 
-?>
+        $sql_NPaciente= 'select NPaciente from paciente order by NPaciente desc limit 1;';
+        $gsent = $pdo->prepare($sql_NPaciente);
+        $gsent->execute();
+        $resultado=$gsent->fetchAll();
+        foreach ($resultado as $dato)
+        $NumPaciente=$dato['NPaciente'];
+        $NumPaciente=$NumPaciente+1;
+
+
+
+        ?>
+
+        <div class="container form-control p divP">
+            <div class="container form-control p" style="background-color:#ADD8E6">
+                <label for="">Nuevo Registro de Paciente</label>
+            </div>
+            <div class="container form-control p" style="background-color:#ADD8E6">
+                <form action="nPaciente.php" method="GET">
+                    <div class="row g-2 align-items-center">
+                        <div class="col form-control">
+                            <label for="">Nombre de Paciente: </label>
+                            <input type="text" class="form-control" name="NombreP">
+                        </div >
+                        <div class="col form-control">
+                            <label for="">Direccion del Paciente</label>
+                            <input type="text" class="form-control" name="DireccionP">
+                        </div> 
+                    </div>
+                    <div class="row g-2 align-items-center">
+                        <div class="col form-control">
+                            <fieldset disabled>
+                                <label for="">N° de Paciente : </label>
+                                <input type="text" id="paciente" class="form-control" value="<?php echo $NumPaciente;?>">
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="row g-3 align-items-center botonG">
+                        <input type="submit" class="btn btn-primary" value="Guardar">
+                    </div>
+
+                </form>
+
+            </div>
+            
+        </div>
 
 
 
@@ -151,20 +165,11 @@ $pc->draw();
 
 
 
-
-
-
-
-
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
         crossorigin="anonymous"></script>
 
-<script src="ProyectoPP/js/nuevo.js"></script>
+    <script src="js/nuevo.js"></script>
 
 
 </body>
