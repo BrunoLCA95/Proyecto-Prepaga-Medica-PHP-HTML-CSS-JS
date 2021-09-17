@@ -103,22 +103,35 @@
 
 <?php
 error_reporting(0);
-require_once ("/ProyectoPP/conexion.php");
+require_once ("conexion.php");
 require_once ("conf.php");
 
-$sql_NPaciente= 'select count(TExamen),tipoExamen from examen,catalogotarifa where TExamen=id group by TExamen;';
+$sql_NPaciente= 'select count(TExamen)as cuenta,tipoExamen from examen,catalogotarifa where TExamen=id group by TExamen order by cuenta ASC;';
 $gsent = $pdo->prepare($sql_NPaciente);
 $gsent->execute();
 $resultado=$gsent->fetchAll();
-foreach ($resultado as $dato)
-$NumP=$dato['NPaciente'];
-
+foreach ($resultado as $dato){
+$NumP[]=$dato['cuenta'];
+$por_total=$por_total+$dato['cuenta'];
+$por_total=$por_total/100;
+var_dump($NumP);
+}
+foreach ($NumP as $dato){
+$arreglo[]=($dato['cuenta']/$por_total);
+$arreglo2[]=$dato['tipoExamen'];
+}
 
 
 
 
 // Creamos la gráfica
-$pc = new C_PhpChartX(array(array(0,2,4,6,1,3,5,8,10,7,9)),'basic_chart');
+$pc = new C_PhpChartX(array($arreglo),'basic_chart');
+$pc->set_axes(array(
+    'xaxis'=> array('label'=>'cantidades)'),
+    'yaxis'=> array('label'=>'Datos Recolectados'),
+
+));
+
 // Efecto de gráfica en movimiento
 $pc->set_animate(true);
 // Añadimos un título a la gráfica
