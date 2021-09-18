@@ -95,6 +95,80 @@
 <body>
     
 
+<?php
+        error_reporting(0);
+        include_once 'conexion.php';
+
+        $sql_NPaciente= 'select * from factura;';
+        $gsent = $pdo->prepare($sql_NPaciente);
+        $gsent->execute();
+        $resultado=$gsent->fetchAll();
+
+    ?>
+
+<div class="container form-control p divP">
+    <div class="container form-control p" style="background-color:#ADD8E6">
+    <label for="">Buscar Factura</label>
+
+    </div>
+
+</div>
+
+<div class="container form-control p divP">
+    <div class="container form-control p" style="background-color:#ADD8E6">
+
+
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">Nª</th>
+            <th scope="col">Paciente</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Compañia de Seguro</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+
+            foreach ($resultado as $dato)
+            $num=$dato["Numero"];
+            $nombre=$dato['NPaciente'];
+            $direccion=$dato['Direccion'];
+            $compa=$dato['CompaniaS'];
+
+            
+
+            echo "<tr>"
+            echo "<th scope='row'>".$num."</th>"
+            echo "<td>".$nombre."</td>"
+            echo "<td>".$direccion."</td>"
+            echo "<td>".$compa."</td>"
+            echo "</tr>"
+
+
+            endforeach
+
+            ?>
+
+        </tbody>
+    </table>
+
+
+
+
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
