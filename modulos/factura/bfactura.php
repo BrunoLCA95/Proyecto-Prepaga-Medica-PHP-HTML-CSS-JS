@@ -108,8 +108,8 @@
 
 
 
-        <div class="container form-control p" style="background-color:#ADD8E6">
-        <table class="table">
+        <div class="container form-control p table-responsive" style="background-color:#ADD8E6">
+        <table class="table table-striped ">
                 <thead>
                     <tr>
                     <th scope="col">N° Factura</th>
@@ -122,7 +122,7 @@
                     <th scope="col">Total Paciente</th>
                     <th scope="col">Total Comp Seg</th>
                     <th scope="col">Total</th>
-                    <th scope="col">Eliminar</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -166,9 +166,7 @@
                     echo '<th scope="row">'.$Medico.'</th>';
                     echo '<th scope="row">'.$Credencial.'</th>';
                     echo '<th scope="row">$'.$TarifaP.'</th>';
-                    echo '<th scope="row">$'.$TarifaP.'</th>';
                     echo '<th scope="row">$'.$TarifaS.'</th>';
-                    echo '<th scope="row">$'.$TarifaT.'</th>';
                     echo '<th scope="row">$'.$TarifaT.'</th>';
                     echo '<th scope="row"><button class="btn btn-primary">Imprimir</button></th>';
                     

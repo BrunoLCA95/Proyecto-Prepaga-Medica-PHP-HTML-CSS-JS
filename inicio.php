@@ -12,12 +12,37 @@
 
 </head>
 <body>
-<div class="container form-control p divP">
-    <div class="container form-control p" style="background-color:#ADD8E6">
-        <label for="">hola</label>
-    </div>
 
+
+<div class="modal modal-signin d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-5 shadow" style="background-color:#ADD8E6">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <!-- <h5 class="modal-title">Modal title</h5> -->
+            </div>
+
+
+            <div class="modal-body p-5 pt-0">
+                <form action="inicio.php" method="GET">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control rounded-4" id="floatingInput" name="usuario">
+                    <label for="floatingInput">Usuario</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control rounded-4" id="floatingPassword" name="contra">
+                    <label for="floatingPassword">Contraseña</label>
+                </div>
+
+
+                
+                <input type="submit" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" value="Iniciar Sesion" >
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
