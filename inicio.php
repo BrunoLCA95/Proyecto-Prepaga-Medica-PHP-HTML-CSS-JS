@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link href="css/estilos.css" rel="stylesheet" type="text/css">
+    <script async src="https://www.google.com/recaptcha/api.js"></script>
 
 </head>
 <body>
@@ -31,6 +32,35 @@
                 <div class="form-floating mb-3">
                     <input type="password" class="form-control rounded-4" id="floatingPassword" name="contra">
                     <label for="floatingPassword">Contraseña</label>
+                </div>
+
+                <?php
+                    $datos;$captcha;
+                    if(isset($_POST['datos'])){ 
+                    $datos = $_POST['datos'];}	
+                    if(isset($_POST['g-recaptcha-response'])){
+                    $captcha=$_POST['g-recaptcha-response'];}
+                    if(!$captcha){
+                    echo 'Chequea la Captcha';}
+                    $secretKey = "6LcqSHocAAAAAA2fMH3GPqlJpaWqtZhNFWiiZeSQ";
+                    $ip = $_SERVER['REMOTE_ADDR'];
+                    //Chequear captcha con Google
+                    $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&response=".$captcha."&remoteip=".$ip);
+                    $responseKeys = json_decode($response,true);
+                    if(intval($responseKeys["success"]) !== 1) {
+                    echo '<h4>Error!</h4>';
+                        } else {
+                    //si la captcha es correcta se escribe los datos introducidos
+                    echo '<div id="result">'.$datos.'</div>';}
+                    ?>
+
+
+                <div class="g-recaptcha" data-sitekey="6LcqSHocAAAAABaU6Faw0dmDJDMRdrA5cfm-Wln8">
+
+
+
+
+
                 </div>
 
 
