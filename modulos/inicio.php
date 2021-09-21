@@ -92,91 +92,25 @@
     </div>
 </nav>
 
+<body >
+<div class="inicio container" id="bnb">
+    <p>Bienvenid@</p>
+</div>
+<div class="inicio2 container" id="bnb1">
+    <p>Proyecto de servicios de cobranzas y comprobantes de prepaga medica</p>
+</div>
+<div class="inicio3 container" id="bnb2">
+    <p>Bruno L Cosimano Abadie</p>
+</div>
 
 
 
 
-<!--Formularios Seguro -->
-        <?php
-        error_reporting(0);
-        include_once 'conexion.php';
-        $idComp;
-        $NombComp;
-
-
-        $NumP=$_GET["FSpas"];
-        $NumComp=$_GET['comp'];
-
-        $sql_NPaciente= 'insert into formaseguro (NPaciente,Compañia) values ('.$NumP.','.$NumComp.');';
-        $gsent = $pdo->prepare($sql_NPaciente);
-        $gsent->execute();
-
-
-
-        $sql_NPaciente= 'select idCompanias, Nombre from listadocompanias;';
-        $gsent = $pdo->prepare($sql_NPaciente);
-        $gsent->execute();
-        $resultado=$gsent->fetchAll();
-        foreach ($resultado as $dato)
-
-
-        ?>
-    <!--Nuevo Formulario de Seguro -->
-    <div class="container form-control p divP" id="fsn" >
-        <div class="container form-control p" style="background-color:#ADD8E6">
-            <label for="">Nuevo Formulario de Seguro</label>
-        </div>
-        <div class="container form-control p" style="background-color:#ADD8E6">
-            <form action="nformSeg.php" method="GET">
-                <div class="row g-2 align-items-center">
-                    <div class="col form-control">
-                        <label for="">N° de Paciente: </label>
-                        <input type="text" class="form-control" name="FSpas">
-                    </div>
-
-                    <div class="col form-control">
-                        <label for="">Nombre Compañia de Seguro:</label>
-
-                        <select class="form-control" name="comp">       
-
-                            <?php
-
-                            foreach ($resultado as $dato):
-                                $idComp=$dato['idCompanias'];
-                                $NombComp=$dato['Nombre'];
-                                echo "<option value='".$idComp."'>".$NombComp."</option>";
-
-                            endforeach;
-
-                            ?>
-
-                        </select>
-
-                    </div>
-                </div>
-                <div class="row g-3 align-items-center botonG">
-                    <input type="submit" class="btn btn-primary" value="Guardar">
-                </div>
-
-            </form>
-
-        </div>
-        
-    </div>
-
-
-
-
-
-    <!--Modificar Formulario de Seguro -->
-<!--Fin formularios de seguro -->
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
         crossorigin="anonymous"></script>
 
-    <script src="js/nuevo.js"></script>
+<script src="js/nuevo.js"></script>
 
 
 </body>
