@@ -122,6 +122,7 @@
                     <th scope="col">Total Paciente</th>
                     <th scope="col">Total Comp Seg</th>
                     <th scope="col">Total</th>
+                    <th scope="col"></th>
 
                     </tr>
                 </thead>
@@ -136,7 +137,7 @@
                 if ($nombre === null) {
                     $sqlNombre= 'select * from practicap.factura;';
                 } else {
-                    $sqlNombre= 'select * from practicap.factura where NPaciente="'.$nombre.'";';
+                    $sqlNombre= 'select * from practicap.factura where NPaciente like"'.$nombre.'%";';
                 }
                 
 
@@ -169,7 +170,6 @@
                     echo '<th scope="row">$'.$TarifaS.'</th>';
                     echo '<th scope="row">$'.$TarifaT.'</th>';
                     echo '<th scope="row"><button class="btn btn-primary">Imprimir</button></th>';
-                    
                 echo '</tr>';
 
 

@@ -16,13 +16,11 @@ foreach ($salida as $dato){
         exit;
     } else {
 
-        header("Location: /index.php");
+        header("Location: ProyectoPP/");
         exit;
     }
 
 }
-
-
 
 
 ?>

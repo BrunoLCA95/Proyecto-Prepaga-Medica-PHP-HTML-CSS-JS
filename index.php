@@ -23,8 +23,8 @@
             </div>
 
 
-            <div class="modal-body p-5 pt-0">
-                <form action="login.php" method="POST">
+            <div class="modal-body p-5 pt-0">s
+                <form action="index.php" method="POST">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control rounded-4" name="usuario">
                     <label for="floatingInput">Usuario</label>
@@ -35,33 +35,62 @@
                 </div>
 
                 <?php
-                    $datos;$captcha;
+                    $contador=1;
+
+                    include_once 'conexion.php';
+
+                    $datos;
+                    $captcha=0;
                     if(isset($_POST['datos'])){ 
                     $datos = $_POST['datos'];}	
                     if(isset($_POST['g-recaptcha-response'])){
                     $captcha=$_POST['g-recaptcha-response'];}
-                    if(!$captcha){
-                    echo 'Chequea la Captcha';}
+
                     $secretKey = "6LcqSHocAAAAAA2fMH3GPqlJpaWqtZhNFWiiZeSQ";
                     $ip = $_SERVER['REMOTE_ADDR'];
                     //Chequear captcha con Google
                     $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&response=".$captcha."&remoteip=".$ip);
                     $responseKeys = json_decode($response,true);
                     if(intval($responseKeys["success"]) !== 1) {
-                    echo '<h4>Error!</h4>';
-                        } else {
-                    //si la captcha es correcta se escribe los datos introducidos
-                    echo '<div id="result">'.$datos.'</div>';}
-                    ?>
+                        if ($contador < 1) {
+                            echo '<div class="container form-control p divP" style="background-color:#rgba(180, 46, 68, 0.425)">Chequea el captcha</div>';
+                        }
+                        $contador=$contador+1;               
+                        } else {  
+                                                
+
+                        $user=$_POST["usuario"];
+                        $pass=$_POST["contra"];
+
+                        $sql_querry= 'select nombre, pass from usuarios where nombre="'.$user.'" and pass="'.$pass.'";';
+                        $gsent = $pdo->prepare($sql_querry);
+                        $gsent->execute();
+                        $salida=$gsent->fetchAll();
+
+                        foreach ($salida as $dato){
+                            if (($user === $dato['nombre']) & ($pass === $dato['pass'])) {
+                                header("Location: modulos/inicio.php");
+                                $contador=1;
+                                exit;
+                            } else {
+
+                                header("Location: ProyectoPP/");
+                                exit;
+                            }
+
+                        }   
+                    }
+
+
+
+
+                ?>
 
 
                 <div class="g-recaptcha" data-sitekey="6LcqSHocAAAAABaU6Faw0dmDJDMRdrA5cfm-Wln8">
 
-
-
-
-
                 </div>
+                <br>
 
 
                 
