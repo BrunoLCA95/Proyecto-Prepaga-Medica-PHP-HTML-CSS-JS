@@ -22,7 +22,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/ProyectoPP/index.php">Inicio</a>
+                    <a class="nav-link active" aria-current="page" href="/ProyectoPP/modulos/inicio.php">Inicio</a>
                 </li>
 
 
@@ -93,6 +93,98 @@
 </nav>
 
 <body>
+    <div class="container form-control p divP" id="factura" >
+        <div class="container form-control p" style="background-color:#ADD8E6">
+            <div class="input-group">
+                <form action="bfactura.php" method="GET" class="input-group" >
+                    <input type="text" class="form-control" name="nombre" aria-label="Text input with dropdown button">
+                    <div class="input-group-append">
+                        <input type="submit" class="btn btn-primary" value="Buscar Factura">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+
+        <div class="container form-control p table-responsive" style="background-color:#ADD8E6">
+        <table class="table table-striped ">
+                <thead>
+                    <tr>
+                    <th scope="col">N° Factura</th>
+                    <th scope="col">Nombre Paciente</th>
+                    <th scope="col">Direccion Paciente</th>
+                    <th scope="col">Compañia de Seguros</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Medico</th>
+                    <th scope="col">Credencial</th>
+                    <th scope="col">Total Paciente</th>
+                    <th scope="col">Total Comp Seg</th>
+                    <th scope="col">Total</th>
+                    <th scope="col"></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                <?php
+                error_reporting(0);
+
+                $nombre=null;
+                $nombre=$_GET['nombre'];
+                include_once 'conexion.php';
+                if ($nombre === null) {
+                    $sqlNombre= 'select * from practicap.factura;';
+                } else {
+                    $sqlNombre= 'select * from practicap.factura where NPaciente like"'.$nombre.'%";';
+                }
+                
+
+                $gsent = $pdo->prepare($sqlNombre);
+                $gsent->execute();
+                $resultado=$gsent->fetchAll();
+
+                foreach ($resultado as $dato){
+                $Numero=$dato['Numero'];
+                $NPaciente=$dato['NPaciente'];
+                $Direccion=$dato['Direccion'];
+                $CompaniaS=$dato['CompaniaS'];
+                $DireccionS=$dato['DireccionS'];
+                $Medico=$dato['Medico'];
+                $Credencial=$dato['Credencial'];
+                $TarifaP=$dato['TarifaP'];
+                $TarifaS=$dato['TarifaS'];
+                $TarifaT=$dato['TarifaT'];
+
+
+                echo "<tr>";
+                    echo '<th scope="row">'.$Numero.'</th>';
+                    echo '<th scope="row">'.$NPaciente.'</th>';
+                    echo '<th scope="row">'.$Direccion.'</th>';
+                    echo '<th scope="row">'.$CompaniaS.'</th>';
+                    echo '<th scope="row">'.$DireccionS.'</th>';
+                    echo '<th scope="row">'.$Medico.'</th>';
+                    echo '<th scope="row">'.$Credencial.'</th>';
+                    echo '<th scope="row">$'.$TarifaP.'</th>';
+                    echo '<th scope="row">$'.$TarifaS.'</th>';
+                    echo '<th scope="row">$'.$TarifaT.'</th>';
+                    echo '<th scope="row"><button class="btn btn-primary">Imprimir</button></th>';
+                echo '</tr>';
+
+
+                };
+
+
+
+
+                ?>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
     
 
 <?php
@@ -160,6 +252,11 @@
     </div>
 
 </div>
+
+
+
+
+
 
 
 

@@ -1,106 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programacion 2° Noche</title>
+    <title>ProyectoPP</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link href="css/estilos.css" rel="stylesheet" type="text/css">
+    <script async src="https://www.google.com/recaptcha/api.js"></script>
 
 </head>
-
-<nav class="navbar navbar-expand-lg navbar-dark barra">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="/ProyectoPP/img/logo64.png" alt="" width="40" height="40"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/ProyectoPP/index.php">Inicio</a>
-                </li>
+<body>
 
 
-                <!-- FACTURACION -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Facturar
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/factura/factura.php">Nueva Factura</a></li>
-                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/factura/bfactura.php">Buscar Factura</a></li>                   
-                    </ul>
-                </li>
+<div class="modal modal-signin d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-5 shadow" style="background-color:#ADD8E6">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <!-- <h5 class="modal-title">Modal title</h5> -->
+            </div>
 
 
-                <!-- FORMULARIO SEGURO -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Formularios de Seguro
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/formulariosS/nformSeg.php">Nuevo</a></li>
-                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/formulariosS/mformSeg.php">Modificar</a></li>
-                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/formulariosS/eformSeg.php">Eliminar</a></li>
-                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/formulariosS/bformSeg.php">Buscar</a></li>
-                    </ul>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    </ul>
-                </li>
+            <div class="modal-body p-5 pt-0">s
+                <form action="index.php" method="POST">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control rounded-4" name="usuario">
+                    <label for="floatingInput">Usuario</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control rounded-4" name="contra">
+                    <label for="floatingPassword">Contraseña</label>
+                </div>
+
+                <?php
+                    $contador=1;
+
+                    include_once 'conexion.php';
+
+                    $datos;
+                    $captcha=0;
+                    if(isset($_POST['datos'])){ 
+                    $datos = $_POST['datos'];}	
+                    if(isset($_POST['g-recaptcha-response'])){
+                    $captcha=$_POST['g-recaptcha-response'];}
+
+                    $secretKey = "6LcqSHocAAAAAA2fMH3GPqlJpaWqtZhNFWiiZeSQ";
+                    $ip = $_SERVER['REMOTE_ADDR'];
+                    //Chequear captcha con Google
+                    $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&response=".$captcha."&remoteip=".$ip);
+                    $responseKeys = json_decode($response,true);
+                    if(intval($responseKeys["success"]) !== 1) {
+                        if ($contador < 1) {
+                            echo '<div class="container form-control p divP" style="background-color:#rgba(180, 46, 68, 0.425)">Chequea el captcha</div>';
+                        }
+                        $contador=$contador+1;               
+                        } else {
+
+                        $user=$_POST["usuario"];
+                        $pass=$_POST["contra"];
+
+                        $sql_querry= 'select nombre, pass from usuarios where nombre="'.$user.'" and pass="'.$pass.'";';
+                        $gsent = $pdo->prepare($sql_querry);
+                        $gsent->execute();
+                        $salida=$gsent->fetchAll();
+
+                        foreach ($salida as $dato){
+                            if (($user === $dato['nombre']) & ($pass === $dato['pass'])) {
+                                header("Location: modulos/inicio.php");
+                                $contador=1;
+                                exit;
+                            } else {
+
+                                header("Location: ProyectoPP/");
+                                exit;
+                            }
+
+                        }   
+                    }
 
 
-                <!-- Registro de Examen -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Registro de Examen
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/registrosM/nRegMed.php">Nuevo</a></li>
-                        <li><a class="dropdown-item" href="#">Modificar</a></li>
-                        <li><a class="dropdown-item" href="#">Eliminar</a></li>
-                        <li><a class="dropdown-item" href="#">Buscar</a></li>
-                    </ul>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    </ul>
-                </li>
 
 
-                <!-- Paciente -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Pacientes
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/pacientes/nPaciente.php">Nuevo</a></li>
-                        <li><a class="dropdown-item" href="#">Modificar</a></li>
-                        <li><a class="dropdown-item" href="#">Buscar</a></li>
-                    </ul>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    </ul>
-                </li>
-            </ul>
+                ?>
+
+
+                <div class="g-recaptcha" data-sitekey="6LcqSHocAAAAABaU6Faw0dmDJDMRdrA5cfm-Wln8">
+
+                </div>
+                <br>
+
+
+                
+                <input type="submit" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" value="Iniciar Sesion" >
+                </form>
+            </div>
         </div>
     </div>
-</nav>
-
-<body >
-<div class="inicio container" id="bnb">
-    <p>Bienvenid@</p>
-</div>
-<div class="inicio2 container" id="bnb1">
-    <p>Proyecto de servicios de cobranzas y comprobantes de prepaga medica</p>
-</div>
-<div class="inicio3 container" id="bnb2">
-    <p>Bruno L Cosimano Abadie</p>
 </div>
 
 
@@ -111,8 +108,5 @@
         crossorigin="anonymous"></script>
 
 <script src="js/nuevo.js"></script>
-
-
 </body>
-
 </html>
