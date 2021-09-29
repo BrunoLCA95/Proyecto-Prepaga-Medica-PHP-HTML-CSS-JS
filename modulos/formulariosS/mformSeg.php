@@ -105,7 +105,6 @@
             </div>
         </div>
 
-
         <div class="container form-control p table-responsive " style="background-color:#ADD8E6">
         <table class="table table-striped ">
                 <thead>
@@ -113,6 +112,7 @@
                     <th scope="col">N° Formulario</th>
                     <th scope="col">Nombre Paciente</th>
                     <th scope="col">Compañia de Seguro</th>
+                    <th scope="col"></th>
                     <th scope="col"></th>
                     </tr>
                 </thead>
@@ -133,7 +133,6 @@
                 $pruebasql= "update practicap.formaseguro set NPaciente=".$vara.", Compañia=".$varb." where NFormulario=".$varn.";";
                 $prueba1 = $pdo->prepare($pruebasql);
                 $prueba1->execute();
-               
                 $gsent = $pdo->prepare($sqldatos);
                 $gsent->execute();
                 $resultado=$gsent->fetchAll();
@@ -180,7 +179,8 @@
                     }
 
                     echo '</select></th>';
-                    echo '<th scope="row"><input type="submit" class="btn btn-primary" value="Modificar"</th></form></tr>';
+                    echo '<th scope="row"><input type="submit" class="btn btn-primary" value="Modificar"</th>';
+                    echo '<th scope="row"><input type="submit" class="btn btn-primary" value="Eliminar"</th></form></tr>';
                 };
                 ?>
 
@@ -200,7 +200,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
         crossorigin="anonymous"></script>
-
 <script src="../js/nuevo.js"></script>
 
 </body>

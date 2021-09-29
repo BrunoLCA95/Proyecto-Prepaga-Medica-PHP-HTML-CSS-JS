@@ -56,8 +56,7 @@
                             echo '<div class="container form-control p divP" style="background-color:#rgba(180, 46, 68, 0.425)">Chequea el captcha</div>';
                         }
                         $contador=$contador+1;               
-                        } else {  
-                                                
+                        } else {
 
                         $user=$_POST["usuario"];
                         $pass=$_POST["contra"];
