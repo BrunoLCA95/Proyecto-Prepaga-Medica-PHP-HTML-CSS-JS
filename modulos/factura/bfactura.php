@@ -139,7 +139,6 @@
                 } else {
                     $sqlNombre= 'select * from practicap.factura where NPaciente like"'.$nombre.'%";';
                 }
-                
 
                 $gsent = $pdo->prepare($sqlNombre);
                 $gsent->execute();
@@ -187,7 +186,7 @@
     </div>
     
 
-<?php
+    <?php
         error_reporting(0);
         include_once 'conexion.php';
 
@@ -195,20 +194,16 @@
         $gsent = $pdo->prepare($sql_NPaciente);
         $gsent->execute();
         $resultado=$gsent->fetchAll();
-
     ?>
 
 <div class="container form-control p divP">
     <div class="container form-control p" style="background-color:#ADD8E6">
     <label for="">Buscar Factura</label>
-
     </div>
-
 </div>
 
 <div class="container form-control p divP">
     <div class="container form-control p" style="background-color:#ADD8E6">
-
 
     <table class="table">
         <thead>

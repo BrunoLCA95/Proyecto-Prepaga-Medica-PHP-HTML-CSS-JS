@@ -23,7 +23,7 @@
             </div>
 
 
-            <div class="modal-body p-5 pt-0">s
+            <div class="modal-body p-5 pt-0">
                 <form action="index.php" method="POST">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control rounded-4" name="usuario">
@@ -85,13 +85,10 @@
 
                 ?>
 
-
                 <div class="g-recaptcha" data-sitekey="6LcqSHocAAAAABaU6Faw0dmDJDMRdrA5cfm-Wln8">
 
                 </div>
                 <br>
-
-
                 
                 <input type="submit" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" value="Iniciar Sesion" >
                 </form>
