@@ -12,6 +12,7 @@
 
 </head>
 
+
 <nav class="navbar navbar-expand-lg navbar-dark barra">
     <div class="container-fluid">
         <a class="navbar-brand" href="#"><img src="/ProyectoPP/img/logo64.png" alt="" width="40" height="40"></a>
@@ -92,84 +93,96 @@
     </div>
 </nav>
 
+<body >
+
+<div class="container form-control p divP" id="factura" >
+        <div class="container form-control p" style="background-color:#ADD8E6">
+            <div class="input-group">
+                <form action="bPaciente.php" method="GET" class="input-group" >
+                    <input type="text" class="form-control" name="nombre" aria-label="Text input with dropdown button">
+                    <div class="input-group-append">
+                        <input type="submit" class="btn btn-primary" value="Buscar Paciente">
+                    </div>
+                </form>
+            </div>
+        </div>
 
 
 
 
-<!--Formularios Seguro -->
-        <?php
+        <div class="container form-control p table-responsive" style="background-color:#ADD8E6">
+        <table class="table table-striped ">
+                <thead>
+                    <tr>
+                    <th scope="col">N° Paciente</th>
+                    <th scope="col">Nombre Paciente</th>
+                    <th scope="col">Direccion Paciente</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                <?php
+                error_reporting(0);
+
+                $nombre=null;
+                $nombre=$_GET['nombre'];
+                include_once 'conexion.php';
+                if ($nombre === null) {
+                    $sqlNombre= 'select * from practicap.paciente;';
+                } else {
+                    $sqlNombre= 'select * from practicap.paciente where nombre like"'.$nombre.'%";';
+                }
+
+                $gsent = $pdo->prepare($sqlNombre);
+                $gsent->execute();
+                $resultado=$gsent->fetchAll();
+
+                foreach ($resultado as $dato){
+                $Numero=$dato['NPaciente'];
+                $NPaciente=$dato['nombre'];
+                $Direccion=$dato['direccion'];
+
+
+                echo "<tr>";
+                    echo '<th scope="row">'.$Numero.'</th>';
+                    echo '<th scope="row">'.$NPaciente.'</th>';
+                    echo '<th scope="row">'.$Direccion.'</th>';
+
+                echo '</tr>';
+
+
+                };
+
+
+
+
+                ?>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+    
+
+    <?php
         error_reporting(0);
         include_once 'conexion.php';
-        $idComp;
-        $NombComp;
 
-
-        $NumP=$_GET["FSpas"];
-        $NumComp=$_GET['comp'];
-
-        $sql_NPaciente= 'insert into formaseguro (NPaciente,Compañia) values ('.$NumP.','.$NumComp.');';
-        $gsent = $pdo->prepare($sql_NPaciente);
-        $gsent->execute();
-
-
-
-        $sql_NPaciente= 'select idCompanias, Nombre from listadocompanias;';
+        $sql_NPaciente= 'select * from factura;';
         $gsent = $pdo->prepare($sql_NPaciente);
         $gsent->execute();
         $resultado=$gsent->fetchAll();
-        foreach ($resultado as $dato)
-
-
-        ?>
-    <!--Nuevo Formulario de Seguro -->
-    <div class="container form-control p divP" id="fsn" >
-        <div class="container form-control p" style="background-color:#ADD8E6">
-            <label for="">Nuevo Formulario de Seguro</label>
-        </div>
-        <div class="container form-control p" style="background-color:#ADD8E6">
-            <form action="nformSeg.php" method="GET">
-                <div class="row g-2 align-items-center">
-                    <div class="col form-control">
-                        <label for="">N° de Paciente: </label>
-                        <input type="text" class="form-control" name="FSpas">
-                    </div>
-
-                    <div class="col form-control">
-                        <label for="">Nombre Compañia de Seguro:</label>
-
-                        <select class="form-control" name="comp">       
-
-                            <?php
-
-                            foreach ($resultado as $dato):
-                                $idComp=$dato['idCompanias'];
-                                $NombComp=$dato['Nombre'];
-                                echo "<option value='".$idComp."'>".$NombComp."</option>";
-
-                            endforeach;
-
-                            ?>
-
-                        </select>
-
-                    </div>
-                </div>
-                <div class="row g-3 align-items-center botonG">
-                    <input type="submit" class="btn btn-primary" value="Guardar">
-                </div>
-
-            </form>
-
-        </div>
-        
-    </div>
+    ?>
 
 
 
 
 
-    <!--Modificar Formulario de Seguro -->
-<!--Fin formularios de seguro -->
+
+
+
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"

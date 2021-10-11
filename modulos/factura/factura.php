@@ -63,9 +63,9 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/ProyectoPP/modulos/registrosM/nRegMed.php">Nuevo</a></li>
-                        <li><a class="dropdown-item" href="#">Modificar</a></li>
-                        <li><a class="dropdown-item" href="#">Eliminar</a></li>
-                        <li><a class="dropdown-item" href="#">Buscar</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/registrosM/mRegMed.php">Modificar</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/registrosM/eRegMed.php">Eliminar</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/registrosM/bRegMed.php">Buscar</a></li>
                     </ul>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     </ul>
@@ -80,8 +80,8 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/ProyectoPP/modulos/pacientes/nPaciente.php">Nuevo</a></li>
-                        <li><a class="dropdown-item" href="#">Modificar</a></li>
-                        <li><a class="dropdown-item" href="#">Buscar</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/pacientes/mPaciente.php">Modificar</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/pacientes/bPaciente.php">Buscar</a></li>
                     </ul>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     </ul>
@@ -404,7 +404,7 @@
         <div class="container form-control p" style="background-color:#ADD8E6">
             <div class="row g-3 align-items-center">
                 <input class="btn btn-primary" type="button" value="Guardar y Imprimir">
-
+                <button type="submit" class="btn btn-primary">Cobrar</button>
             </div>
         </div>
 

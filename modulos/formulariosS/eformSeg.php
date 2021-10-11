@@ -64,9 +64,9 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/ProyectoPP/modulos/registrosM/nRegMed.php">Nuevo</a></li>
-                        <li><a class="dropdown-item" href="#">Modificar</a></li>
-                        <li><a class="dropdown-item" href="#">Eliminar</a></li>
-                        <li><a class="dropdown-item" href="#">Buscar</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/registrosM/mRegMed.php">Modificar</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/registrosM/eRegMed.php">Eliminar</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/registrosM/bRegMed.php">Buscar</a></li>
                     </ul>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     </ul>
@@ -81,8 +81,8 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/ProyectoPP/modulos/pacientes/nPaciente.php">Nuevo</a></li>
-                        <li><a class="dropdown-item" href="#">Modificar</a></li>
-                        <li><a class="dropdown-item" href="#">Buscar</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/pacientes/mPaciente.php">Modificar</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/pacientes/bPaciente.php">Buscar</a></li>
                     </ul>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     </ul>
@@ -96,7 +96,7 @@
     <div class="container form-control p divP" id="factura" >
         <div class="container form-control p" style="background-color:#ADD8E6">
             <div class="input-group">
-                <form action="bfactura.php" method="GET" class="input-group" >
+                <form action="eformSeg.php" method="GET" class="input-group" >
                     <input type="text" class="form-control" name="nombre" aria-label="Text input with dropdown button">
                     <div class="input-group-append">
                         <input type="submit" class="btn btn-primary" value="Buscar Formulario de Seguro">
@@ -118,14 +118,21 @@
                 <tbody>
                 <?php
                 error_reporting(0);
+                include_once 'conexion.php';
 
                 //$pruebasql="update formaseguro set NPaciente=(select NPaciente from paciente where nombre="Casimiro"), Compañia=(select idCompanias from listadocompanias where Nombre="Ostes") where NFormulario=2;";
 
                 $nombre=null;
                 $nombre=$_GET['nombre'];
-                include_once 'conexion.php';
-                $sqldatos= 'SELECT formaseguro.NFormulario,formaseguro.NPaciente,formaseguro.Compañia, paciente.nombre, listadocompanias.Nombre FROM formaseguro,paciente,listadocompanias where formaseguro.NPaciente=paciente.NPaciente and formaseguro.Compañia=listadocompanias.idCompanias;';
- 
+                $sqldatos;
+                if ($nombre == null) {
+                    $sqldatos= 'SELECT formaseguro.NFormulario,formaseguro.NPaciente,formaseguro.Compañia, paciente.nombre, listadocompanias.Nombre FROM formaseguro,paciente,listadocompanias where formaseguro.NPaciente=paciente.NPaciente and formaseguro.Compañia=listadocompanias.idCompanias;';
+                }else{
+                    $sqldatos='SELECT formaseguro.NFormulario,formaseguro.NPaciente,formaseguro.Compañia, paciente.nombre, listadocompanias.Nombre FROM formaseguro,paciente,listadocompanias where formaseguro.NPaciente=paciente.NPaciente and formaseguro.Compañia=listadocompanias.idCompanias and paciente.nombre like"'.$nombre.'%";';
+                }
+
+
+
                 $varn=$_GET['numero'];
                 $vara=$_GET['test2'];
                 $varb=$_GET['test'];
