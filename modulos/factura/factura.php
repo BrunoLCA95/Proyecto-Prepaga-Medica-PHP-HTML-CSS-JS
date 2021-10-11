@@ -95,9 +95,7 @@
     
 <!--FOrmularios Factura -->
     <div class="container form-control p divP" id="factura" >
-        <div class="container form-control p" style="background-color:#ADD8E6">
-            <label for="">Nueva Factura</label>
-        </div>
+        
 
 
         <!--FORMULARIO-->
