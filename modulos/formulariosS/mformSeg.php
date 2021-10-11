@@ -113,7 +113,6 @@
                     <th scope="col">Nombre Paciente</th>
                     <th scope="col">Compañia de Seguro</th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -133,6 +132,7 @@
                 $pruebasql= "update practicap.formaseguro set NPaciente=".$vara.", Compañia=".$varb." where NFormulario=".$varn.";";
                 $prueba1 = $pdo->prepare($pruebasql);
                 $prueba1->execute();
+
                 $gsent = $pdo->prepare($sqldatos);
                 $gsent->execute();
                 $resultado=$gsent->fetchAll();
@@ -179,8 +179,7 @@
                     }
 
                     echo '</select></th>';
-                    echo '<th scope="row"><input type="submit" class="btn btn-primary" value="Modificar"</th>';
-                    echo '<th scope="row"><input type="submit" class="btn btn-primary" value="Eliminar"</th></form></tr>';
+                    echo '<th scope="row"><input type="submit" class="btn btn-primary" value="Modificar"</th></form></tr>';
                 };
                 ?>
 
@@ -189,11 +188,6 @@
         </div>
     </div>
     
-
-
-
-
-
 
 
 
