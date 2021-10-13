@@ -120,6 +120,14 @@
         foreach ($resultado as $dato)
 
 
+        $sqlnum = 'select NFormulario from formaseguro order by NFormulario desc limit 1';
+        $gsent = $pdo->prepare($sqlnum);
+        $gsent->execute();
+        $numFin = $gsent->fetchAll();
+        foreach ($numFin as $datos)
+        $numf = $datos['NFormulario']+1;
+
+
         ?>
     <!--Nuevo Formulario de Seguro -->
     <div class="container form-control p divP" id="fsn" >
@@ -141,6 +149,7 @@
 
                             <?php
 
+
                             foreach ($resultado as $dato):
                                 $idComp=$dato['idCompanias'];
                                 $NombComp=$dato['Nombre'];
@@ -154,6 +163,14 @@
 
                     </div>
                 </div>
+                <div class="row g-2 align-items-center">
+                        <div class="col form-control">
+                            <fieldset disabled>
+                                <label for="">N° de Formulario : </label>
+                                <input type="text" id="nDF" class="form-control" value="<?php echo $numf;?>">
+                            </fieldset>
+                        </div>
+                    </div>
                 <div class="row g-3 align-items-center botonG">
                     <input type="submit" class="btn btn-primary" value="Guardar">
                 </div>

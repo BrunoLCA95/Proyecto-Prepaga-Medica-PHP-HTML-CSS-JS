@@ -9,7 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link href="/ProyectoPP/css/estilos.css" rel="stylesheet" type="text/css">
-
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-dark barra">
@@ -93,130 +92,113 @@
 </nav>
 
 <body>
-
-
-<!--Formularios Registro de Examen -->
-        <?php
-        error_reporting(0);
-        include_once 'conexion.php';
-
-        $sql_NPaciente= 'insert into examen (NMedico, NPaciente, TExamen) values ('.$NumMedicoP.','.$Num.','.$NumTipoP.');';
-        $gsent = $pdo->prepare($sql_NPaciente);
-        $gsent->execute();
-
-        $idMedi;
-        $NombMedi;
-        $idTipo;
-        $NombTipo;
-        $UltimoReg;
-
-        $sql_numF= 'select NExamen from examen order by NExamen desc limit 1;';
-        $gsent = $pdo->prepare($sql_numF);
-        $gsent->execute();
-        $resultado2=$gsent->fetchAll();
-        foreach ($resultado2 as $dato1)
-        $UltimoReg =$dato1['NExamen'] +1;
-
-        $sql_NPaciente= 'select NMedico,nombre from medico;';
-        $gsent = $pdo->prepare($sql_NPaciente);
-        $gsent->execute();
-        $resultado=$gsent->fetchAll();
-
-        $sql_NPaciente1= 'select id,tipoExamen from practicap.catalogotarifa;';
-        $gsent1 = $pdo->prepare($sql_NPaciente1);
-        $gsent1->execute();
-        $resultado1=$gsent1->fetchAll();
- 
-        $Num=$_GET["FSpas"];
-        $NumMedicoP=$_GET["medico"];
-        $NumTipoP=$_GET["tipoExamen"];
-
-
-
-
-        ?>
-        
-    <div class="container form-control p divP" id="ocultarRegN" >
-            <div class="container form-control p" style="background-color:#ADD8E6">
-                <label for="">Nuevo Registro Medico</label>
-            </div>
-            <div class="container form-control p" style="background-color:#ADD8E6">
-                <form action="nRegMed.php" method="GET">
-                    <div class="row g-2 align-items-center">
-                        <div class="col form-control">
-                            <label for="">N° de Paciente: </label>
-                            <input type="text" class="form-control" name="FSpas">
-                        </div >
-                        
-                        <div class="col form-control">
-                            <label for="">Medico:</label>
-                            <select class="form-control" name="medico" id="">       
-
-                                <?php
-
-                                foreach ($resultado as $dato):
-                                    $idMedi=$dato['NMedico'];
-                                    $NombMedi=$dato['nombre'];
-                                    echo "<option value='".$idMedi."'>$NombMedi</option>";
-
-                                endforeach;
-
-                                ?>
-
-                            </select>
-                        </div>
-
-                        <div class="col form-control">
-                            <label for="">Tipo de Examen:</label>
-
-                            <select class="form-control" name="tipoExamen" id="">       
-
-                                <?php
-
-                                foreach ($resultado1 as $dato):
-                                    $idTipo=$dato['id'];
-                                    $NombTipo=$dato['tipoExamen'];
-                                    echo "<option value='$idTipo'>$NombTipo</option>";
-
-                                endforeach;
-
-                                ?>
-
-                            </select>
-
-                        </div>
+    <div class="container form-control p divP" id="factura" >
+        <div class="container form-control p" style="background-color:#ADD8E6">
+            <div class="input-group">
+                <form action="mformSeg.php" method="GET" class="input-group" >
+                    <input type="text" class="form-control" name="nombre" aria-label="Text input with dropdown button">
+                    <div class="input-group-append">
+                        <input type="submit" class="btn btn-primary" value="Buscar Formulario de Seguro">
                     </div>
-                    <div class="row g-2 align-items-center">
-                        <div class="col form-control">
-                            <fieldset disabled>
-                                <label for="">N° de Paciente : </label>
-                                <input type="text" id="paciente" class="form-control" value="<?php echo $UltimoReg;?>">
-                            </fieldset>
-                        </div>
-                    </div>
-                    <div class="row g-3 align-items-center botonG">
-                        <input type="submit" class="btn btn-primary" value="Guardar">
-                    </div>
-
                 </form>
-
             </div>
-            
         </div>
 
+        <div class="container form-control p table-responsive " style="background-color:#ADD8E6">
+        <table class="table table-striped ">
+                <thead>
+                    <tr>
+                    <th scope="col">N° Examen</th>
+                    <th scope="col">Paciente</th>
+                    <th scope="col">Medico</th>
+                    <th scope="col">Tipo de Examen</th>
+                    <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                error_reporting(0);
+                include_once 'conexion.php';
+
+                //$pruebasql="update formaseguro set NPaciente=(select NPaciente from paciente where nombre="Casimiro"), Compañia=(select idCompanias from listadocompanias where Nombre="Ostes") where NFormulario=2;";
+
+                $nombre=null;
+                $nombre=$_GET['nombre'];
+                $sqldatos;
+                if ($nombre == null) {
+                    $sqldatos= 'SELECT e.NExamen,m.nombre as medico, pa.nombre as paciente, ct.tipoExamen as examen FROM examen as e, medico as m, paciente as pa, catalogotarifa as ct where m.NMedico=e.NMedico and pa.NPaciente=e.NPaciente and ct.id=e.TExamen;';
+                }else{
+                    $sqldatos='SELECT e.NExamen,m.nombre as medico, pa.nombre as paciente, ct.tipoExamen as examen FROM examen as e, medico as m, paciente as pa, catalogotarifa as ct where m.NMedico=e.NMedico and pa.NPaciente=e.NPaciente and ct.id=e.TExamen and paciente.nombre like"'.$nombre.'%";';
+                }
+ 
+                $varn=$_GET['numero'];
+                $vara=$_GET['test2'];
+                $varb=$_GET['test'];
+                $pruebasql= "update practicap.formaseguro set NPaciente=".$vara.", Compañia=".$varb." where NFormulario=".$varn.";";
+                $prueba1 = $pdo->prepare($pruebasql);
+                $prueba1->execute();
+
+                $gsent = $pdo->prepare($sqldatos);
+                $gsent->execute();
+                $resultado=$gsent->fetchAll();
+
+                foreach ($resultado as $dato){
+                $Numero=$dato['NExamen'];
+                $medico=$dato['medico'];
+                $paciente=$dato['paciente'];
+                $examen=$dato['examen'];
+
+                echo "<tr>";
+                    echo '<form action="mformSeg.php" method="GET">';
+                    echo '<th scope="row"><input type="text" name="numero" class="form-control" value="'.$Numero.'"></th>';                
+                    echo '<th scope="row"><select name="test2" id="test2" class="form-control">';
+                    
+                    $sqlnom='select * from practicap.paciente;';
+                    $gsent = $pdo->prepare($sqlnom);
+                    $gsent->execute();
+                    $nom=$gsent->fetchAll();
+                    
+                    echo "<option value='".$NPaciente."'>".$nomPC."</option>";
+                    
+                    foreach ($nom as $vuelta) {
+                        $id=$vuelta["NPaciente"];
+                        $nomP=$vuelta["nombre"];
+                        echo "<option value='".$id."'>".$nomP."</option>";
+                    }                  
+                    echo '</select></th>';
+
+                    echo '<th scope="row"><select name="test" id="test" class="form-control">';
+
+                    $sqlnom='select * from practicap.listadocompanias;';
+                    $gsent = $pdo->prepare($sqlnom);
+                    $gsent->execute();
+                    $nom=$gsent->fetchAll();
+
+                    echo "<option value='".$NCompS."'>".$nomCompS."</option>";
+
+                    foreach ($nom as $vuelta) {
+                        $id=$vuelta["idCompanias"];
+                        $nomP=$vuelta["Nombre"];
+                        echo "<option value='".$id."'>".$nomP."</option>";
+                    }
+
+                    echo '</select></th>';
+                    echo '<th scope="row"><input type="submit" class="btn btn-primary" value="Modificar"</th></form></tr>';
+                };
+                ?>
+
+                </tbody>  
+            </table>
+        </div>
+    </div>
     
 
 
 
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
         crossorigin="anonymous"></script>
-
-    <script src="js/nuevo.js"></script>
-
+<script src="../js/nuevo.js"></script>
 
 </body>
 
