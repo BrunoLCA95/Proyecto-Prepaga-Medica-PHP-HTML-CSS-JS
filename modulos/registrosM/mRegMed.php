@@ -95,8 +95,8 @@
     <div class="container form-control p divP" id="factura" >
         <div class="container form-control p" style="background-color:#ADD8E6">
             <div class="input-group">
-                <form action="mformSeg.php" method="GET" class="input-group" >
-                    <input type="text" class="form-control" name="nombre" aria-label="Text input with dropdown button">
+                <form action="mRegMed.php" method="GET" class="input-group" >
+                    <input type="text" class="form-control" name="B_Nombre" aria-label="Text input with dropdown button">
                     <div class="input-group-append">
                         <input type="submit" class="btn btn-primary" value="Buscar Formulario de Seguro">
                     </div>
@@ -119,74 +119,100 @@
                 <?php
                 error_reporting(0);
                 include_once 'conexion.php';
+                //SQL MODIFICAR
+                $O_Numero=$_GET['numero'];
+                $O_Paciente=$_GET['Paciente'];
+                $O_Medico=$_GET['NMedico'];
+                $O_TExamen=$_GET['T_examen'];
+                $Sql_Modificar= "update practicap.examen set NMedico=".$O_Medico.", NPaciente=".$O_Paciente.", TExamen=".$O_TExamen." where NExamen=".$O_Numero.";";
+                $Modificar = $pdo->prepare($Sql_Modificar);
+                $Modificar->execute();
 
-                //$pruebasql="update formaseguro set NPaciente=(select NPaciente from paciente where nombre="Casimiro"), Compañia=(select idCompanias from listadocompanias where Nombre="Ostes") where NFormulario=2;";
-
+                //SQL BUSCAR
                 $nombre=null;
-                $nombre=$_GET['nombre'];
+                $nombre=$_GET['B_Nombre'];
                 $sqldatos;
                 if ($nombre == null) {
-                    $sqldatos= 'SELECT e.NExamen,m.nombre as medico, pa.nombre as paciente, ct.tipoExamen as examen FROM examen as e, medico as m, paciente as pa, catalogotarifa as ct where m.NMedico=e.NMedico and pa.NPaciente=e.NPaciente and ct.id=e.TExamen;';
+                    $sqldatos= 'SELECT e.NExamen,e.NMedico,m.nombre as medico,e.NPaciente as NumeroP, pa.nombre as paciente,e.TExamen, ct.tipoExamen as examen FROM examen as e, medico as m, paciente as pa, catalogotarifa as ct where m.NMedico=e.NMedico and pa.NPaciente=e.NPaciente and ct.id=e.TExamen;';
                 }else{
-                    $sqldatos='SELECT e.NExamen,m.nombre as medico, pa.nombre as paciente, ct.tipoExamen as examen FROM examen as e, medico as m, paciente as pa, catalogotarifa as ct where m.NMedico=e.NMedico and pa.NPaciente=e.NPaciente and ct.id=e.TExamen and paciente.nombre like"'.$nombre.'%";';
+                    $sqldatos='SELECT e.NExamen,e.NMedico,m.nombre as medico,e.NPaciente as NumeroP, pa.nombre as paciente,e.TExamen, ct.tipoExamen as examen FROM examen as e, medico as m, paciente as pa, catalogotarifa as ct where m.NMedico=e.NMedico and pa.NPaciente=e.NPaciente and ct.id=e.TExamen and pa.nombre like"'.$nombre.'%";';
                 }
- 
-                $varn=$_GET['numero'];
-                $vara=$_GET['test2'];
-                $varb=$_GET['test'];
-                $pruebasql= "update practicap.formaseguro set NPaciente=".$vara.", Compañia=".$varb." where NFormulario=".$varn.";";
-                $prueba1 = $pdo->prepare($pruebasql);
-                $prueba1->execute();
-
                 $gsent = $pdo->prepare($sqldatos);
                 $gsent->execute();
                 $resultado=$gsent->fetchAll();
 
                 foreach ($resultado as $dato){
                 $Numero=$dato['NExamen'];
+                $Nmedico=$dato['NMedico'];
                 $medico=$dato['medico'];
+                $Npaciente=$dato['NumeroP'];
                 $paciente=$dato['paciente'];
+                $N_TExamen=$dato['TExamen'];
                 $examen=$dato['examen'];
 
+
+                //INICIO TABLA
                 echo "<tr>";
-                    echo '<form action="mformSeg.php" method="GET">';
+                    echo '<form action="mRegMed.php" method="GET">';
                     echo '<th scope="row"><input type="text" name="numero" class="form-control" value="'.$Numero.'"></th>';                
-                    echo '<th scope="row"><select name="test2" id="test2" class="form-control">';
                     
-                    $sqlnom='select * from practicap.paciente;';
-                    $gsent = $pdo->prepare($sqlnom);
+                    //Paciente
+                    echo '<th scope="row"><select name="Paciente" class="form-control">';
+                   
+                    $sqlP='select * from practicap.paciente;';
+                    $gsent = $pdo->prepare($sqlP);
                     $gsent->execute();
-                    $nom=$gsent->fetchAll();
+                    $P_Nombre=$gsent->fetchAll();
                     
-                    echo "<option value='".$NPaciente."'>".$nomPC."</option>";
+                    echo "<option value='".$Npaciente."'>".$paciente."</option>";
                     
-                    foreach ($nom as $vuelta) {
-                        $id=$vuelta["NPaciente"];
-                        $nomP=$vuelta["nombre"];
-                        echo "<option value='".$id."'>".$nomP."</option>";
+                    foreach ($P_Nombre as $Datos_P) {
+                        $id_paciente=$Datos_P["NPaciente"];
+                        $nomP=$Datos_P["nombre"];
+                        echo "<option value='".$id_paciente."'>".$nomP."</option>";
                     }                  
                     echo '</select></th>';
 
-                    echo '<th scope="row"><select name="test" id="test" class="form-control">';
+                    //Medico
+                    echo '<th scope="row"><select name="NMedico" class="form-control">';
 
-                    $sqlnom='select * from practicap.listadocompanias;';
-                    $gsent = $pdo->prepare($sqlnom);
+                    $sqlM='SELECT * FROM practicap.medico;';
+                    $gsent = $pdo->prepare($sqlM);
                     $gsent->execute();
-                    $nom=$gsent->fetchAll();
+                    $N_medico=$gsent->fetchAll();
 
-                    echo "<option value='".$NCompS."'>".$nomCompS."</option>";
+                    echo "<option value='".$Nmedico."'>".$medico."</option>";
 
-                    foreach ($nom as $vuelta) {
-                        $id=$vuelta["idCompanias"];
-                        $nomP=$vuelta["Nombre"];
-                        echo "<option value='".$id."'>".$nomP."</option>";
+                    foreach ($N_medico as $Datos_M) {
+                        $id_Medico=$Datos_M["NMedico"];
+                        $nomM=$Datos_M["nombre"];
+                        echo "<option value='".$id_Medico."'>".$nomM."</option>";
                     }
 
                     echo '</select></th>';
+
+                    //Tipo de Examen
+                    echo '<th scope="row"><select name="T_examen" class="form-control">';
+
+                    $sql_TE='SELECT * FROM practicap.catalogotarifa;';
+                    $gsent = $pdo->prepare($sql_TE);
+                    $gsent->execute();
+                    $N_TE=$gsent->fetchAll();
+
+                    echo "<option value='".$N_TExamen."'>".$examen."</option>";
+
+                    foreach ($N_TE as $Datos_TE) {
+                        $id_Tipo=$Datos_TE["id"];
+                        $Tipo=$Datos_TE["tipoExamen"];
+                        echo "<option value='".$id_Tipo."'>".$Tipo."</option>";
+                    }
+
+                    echo '</select></th>';
+
+                    //Boton Modificar
                     echo '<th scope="row"><input type="submit" class="btn btn-primary" value="Modificar"</th></form></tr>';
                 };
                 ?>
-
                 </tbody>  
             </table>
         </div>

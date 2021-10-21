@@ -138,6 +138,7 @@
         $CosE;
         $vpC;
         $vpP;
+        $fecha=date('d-m-Y');
 
 
         $sql_NPaciente= 'select NPaciente from examen where NExamen='.$ex_medico.';';
@@ -379,6 +380,20 @@
                         </fieldset>
                     </form>
                 </div>
+
+                <div class="col form-control">
+                    <form action="" method="GET">
+                        <fieldset disabled>
+                            <div class="col-auto">
+                                <label for="disabledTextInput" class="form-label">Fecha</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" id="paciente" class="form-control" value="<?php echo $fecha; ?>">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
 
 
                 <div class="col form-control">

@@ -63,9 +63,9 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/ProyectoPP/modulos/registrosM/nRegMed.php">Nuevo</a></li>
-                        <li><a class="dropdown-item" href="#">Modificar</a></li>
-                        <li><a class="dropdown-item" href="#">Eliminar</a></li>
-                        <li><a class="dropdown-item" href="#">Buscar</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/registrosM/mRegMed.php">Modificar</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/registrosM/eRegMed.php">Eliminar</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/registrosM/bRegMed.php">Buscar</a></li>
                     </ul>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     </ul>
@@ -80,8 +80,8 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/ProyectoPP/modulos/pacientes/nPaciente.php">Nuevo</a></li>
-                        <li><a class="dropdown-item" href="#">Modificar</a></li>
-                        <li><a class="dropdown-item" href="#">Buscar</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/pacientes/mPaciente.php">Modificar</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/pacientes/bPaciente.php">Buscar</a></li>
                     </ul>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     </ul>
@@ -99,7 +99,7 @@
     <p>Proyecto de servicios de cobranzas y comprobantes de prepaga medica</p>
 </div>
 <div class="inicio3 container" id="bnb2">
-    <p>Bruno L Cosimano Abadie</p>
+    <p>Bruno L. Cosimano Abadie</p>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"

@@ -24,6 +24,9 @@
 
 
             <div class="modal-body p-5 pt-0">
+                <div class="container inicio4">
+                    <p>Iniciar Sesion</p>
+                </div>
                 <form action="index.php" method="POST">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control rounded-4" name="usuario">

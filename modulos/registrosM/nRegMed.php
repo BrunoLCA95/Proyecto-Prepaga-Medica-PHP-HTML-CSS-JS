@@ -99,6 +99,10 @@
         <?php
         error_reporting(0);
         include_once 'conexion.php';
+        
+        $Num=$_GET["FSpas"];
+        $NumMedicoP=$_GET["medico"];
+        $NumTipoP=$_GET["tipoExamen"];
 
         $sql_NPaciente= 'insert into examen (NMedico, NPaciente, TExamen) values ('.$NumMedicoP.','.$Num.','.$NumTipoP.');';
         $gsent = $pdo->prepare($sql_NPaciente);
@@ -127,9 +131,7 @@
         $gsent1->execute();
         $resultado1=$gsent1->fetchAll();
  
-        $Num=$_GET["FSpas"];
-        $NumMedicoP=$_GET["medico"];
-        $NumTipoP=$_GET["tipoExamen"];
+
 
 
 
