@@ -112,7 +112,6 @@
                     <th scope="col">Paciente</th>
                     <th scope="col">Medico</th>
                     <th scope="col">Tipo de Examen</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -144,12 +143,10 @@
                 //INICIO TABLA
                 echo "<tr>";
                     echo '<form action="mRegMed.php" method="GET">';
-                    echo '<th scope="row"><input type="text" name="numero" class="form-control" value="'.$Numero.'"></th>'; 
-                    echo '<th scope="row"><fieldset disabled="disabled"><input type="text" class="form-control" value="'.$paciente.'"></fieldset></th>';
-                    echo '<th scape="row"><fieldset disabled="disabled"><input type="text" class="form-control" value="'.$medico.'"></fieldset></th>';
-                    echo '<th scape="row"><fieldset disabled="disabled"><input type="text" class="form-control" value="'.$examen.'"></th></fieldset>';               
-
-
+                    echo '<th scope="row">'.$Numero.'</th>'; 
+                    echo '<th scope="row">'.$paciente.'</th>';
+                    echo '<th scape="row">'.$medico.'</th>';
+                    echo '<th scape="row">'.$examen.'</th>';               
                 };
                 ?>
                 </tbody>  
