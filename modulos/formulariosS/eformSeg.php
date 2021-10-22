@@ -11,7 +11,6 @@
     <link href="/ProyectoPP/css/estilos.css" rel="stylesheet" type="text/css">
 </head>
 
-
 <nav class="navbar navbar-expand-lg navbar-dark barra">
     <div class="container-fluid">
         <a class="navbar-brand" href="#"><img src="/ProyectoPP/img/logo64.png" alt="" width="40" height="40"></a>
@@ -87,6 +86,12 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     </ul>
                 </li>
+
+                <!-- Boton Cerrar Sesion -->
+                <div class="position-absolute end-0 pruebaNav">
+                    <a class="btn btn-info" href="/proyectoPP" role="button">Cerrar Sesion</a>
+                </div>
+
             </ul>
         </div>
     </div>

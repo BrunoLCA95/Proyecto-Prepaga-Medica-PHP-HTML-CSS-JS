@@ -86,6 +86,12 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     </ul>
                 </li>
+
+                <!-- Boton Cerrar Sesion -->
+                <div class="position-absolute end-0 pruebaNav">
+                    <a class="btn btn-info" href="/proyectoPP" role="button">Cerrar Sesion</a>
+                </div>
+
             </ul>
         </div>
     </div>
@@ -96,8 +102,6 @@
 <!--FOrmularios Factura -->
     <div class="container form-control p divP" id="factura" >
         
-
-
         <!--FORMULARIO-->
         <div class="container form-control p" style="background-color:#ADD8E6">
             <div class="cont1">
