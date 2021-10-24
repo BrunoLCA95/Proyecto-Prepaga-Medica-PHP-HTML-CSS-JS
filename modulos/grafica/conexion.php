@@ -2,7 +2,7 @@
 
 $link = 'mysql:host=localhost;dbname=practicap';
 $username = "root";
-$password = "skypea95";
+$password = "password";
 
 try{
     $pdo = new PDO($link, $username, $password);
