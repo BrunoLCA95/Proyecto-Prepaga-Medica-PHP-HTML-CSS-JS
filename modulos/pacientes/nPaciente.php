@@ -88,9 +88,23 @@
                     </ul>
                 </li>
 
+                <!-- Graficas -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Reportes
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/grafica/nGrafica.php">Examenes Medicos</a></li>
+                        <li><a class="dropdown-item" href="/ProyectoPP/modulos/grafica/oGrafica.php">Compañias de Seguro</a></li>
+                    </ul>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    </ul>
+                </li>
+
                 <!-- Boton Cerrar Sesion -->
                 <div class="position-absolute end-0 pruebaNav">
-                    <a class="btn btn-info" href="/proyectoPP" role="button">Cerrar Sesion</a>
+                    <a class="btn btn-info" href="/ProyectoPP" role="button">Cerrar Sesion</a>
                 </div>
 
             </ul>

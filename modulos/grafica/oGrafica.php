@@ -1,3 +1,25 @@
+<?php
+include_once 'conexion.php';
+
+$sql_datos='SELECT count(formaseguro.Compañia) as cantidad,listadocompanias.Nombre as causas from formaseguro,listadocompanias where Compañia=listadocompanias.idCompanias group by Compañia;';
+$gsent=$pdo->prepare($sql_datos);
+$gsent->execute();
+$datos_grafica=$gsent->fetchAll();
+
+$var_Total;
+
+foreach ($datos_grafica as $dato) {
+    $var_Total=$var_Total+$dato['cantidad'];
+}
+
+$por;
+
+foreach ($datos_grafica as $dato){
+    $por=$dato['cantidad']/$var_Total;
+    $por=$por*100;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +31,43 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link href="/ProyectoPP/css/estilos.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+            ['Causas', 'Cantidades'],
+        <?php
+        foreach ($datos_grafica as $prueba)
+            echo "['".$prueba['causas']."',".$prueba['cantidad']."],"; 
+        ?>
+        ]);
+
+        var options = {
+          title: 'Ranking Compañias de Seguro',
+          height: 500,
+          width: '100%'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      
+        function resizeHandler () {
+            chart.draw(data, options);
+            }
+            if (window.addEventListener) {
+            window.addEventListener('resize',resizeHandler, false);
+            } else if (window.attachEvent){
+            window.attachEvent('onresize', resizeHandler);
+            }
+    }
+    </script>
+
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-dark barra">
@@ -112,113 +171,64 @@
 </nav>
 
 <body>
-    <div class="container form-control p divP" id="factura" >
-        <div class="container form-control p" style="background-color:#ADD8E6">
-            <div class="input-group">
-                <form action="mformSeg.php" method="GET" class="input-group" >
-                    <input type="text" class="form-control" name="nombre" aria-label="Text input with dropdown button">
-                    <div class="input-group-append">
-                        <input type="submit" class="btn btn-primary" value="Buscar Formulario de Seguro">
-                    </div>
-                </form>
+
+
+        
+    <div class="container form-control p divP" id="ocultarRegN" >
+            <div class="container form-control p" style="background-color:#ADD8E6">
+                <label for="">Ranking de Compañias de Seguro mas utilizadas <label>
             </div>
+            <div class="container form-control p" style="background-color:#ADD8E6">
+                <div id="piechart"></div>
+                <div class="container form-control p table-responsive " style="background-color:#ADD8E6">
+                    <table class="table table-striped ">
+                            <thead>
+                                <tr>
+                                <th scope="col">Causas</th>
+                                <th scope="col">Datos Recolectados</th>
+                                <th scope="col">Porcentaje</th>
+                                <th scope="col">Porcentaje Acumulado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            foreach ($datos_grafica as $datoG){
+                            $causa=$datoG['causas'];
+                            $cantidad=$datoG['cantidad'];
+                            $porI=$datoG['cantidad']/$var_Total;
+                            $porI=$porI*100;
+                            $porA=$porA+$por;
+
+
+                            //INICIO TABLA
+                            echo "<tr>";
+                                echo '<form action="mRegMed.php" method="GET">';
+                                echo '<th scope="row">'.$causa.'</th>'; 
+                                echo '<th scope="row">'.$cantidad.'</th>';
+                                echo '<th scape="row">'.$porI.'</th>';
+                                echo '<th scape="row">'.$porA.'</th>';               
+                            };
+                            ?>
+                            </tbody>  
+                        </table>
+                </div>
+            </div>
+            
         </div>
 
-        <div class="container form-control p table-responsive " style="background-color:#ADD8E6">
-        <table class="table table-striped ">
-                <thead>
-                    <tr>
-                    <th scope="col">N° Formulario</th>
-                    <th scope="col">Nombre Paciente</th>
-                    <th scope="col">Compañia de Seguro</th>
-                    <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php
-                error_reporting(0);
-                include_once 'conexion.php';
-
-                //$pruebasql="update formaseguro set NPaciente=(select NPaciente from paciente where nombre="Casimiro"), Compañia=(select idCompanias from listadocompanias where Nombre="Ostes") where NFormulario=2;";
-
-                $nombre=null;
-                $nombre=$_GET['nombre'];
-                $sqldatos;
-                if ($nombre == null) {
-                    $sqldatos= 'SELECT formaseguro.NFormulario,formaseguro.NPaciente,formaseguro.Compañia, paciente.nombre, listadocompanias.Nombre FROM formaseguro,paciente,listadocompanias where formaseguro.NPaciente=paciente.NPaciente and formaseguro.Compañia=listadocompanias.idCompanias;';
-                }else{
-                    $sqldatos='SELECT formaseguro.NFormulario,formaseguro.NPaciente,formaseguro.Compañia, paciente.nombre, listadocompanias.Nombre FROM formaseguro,paciente,listadocompanias where formaseguro.NPaciente=paciente.NPaciente and formaseguro.Compañia=listadocompanias.idCompanias and paciente.nombre like"'.$nombre.'%";';
-                }
- 
-                $varn=$_GET['numero'];
-                $vara=$_GET['test2'];
-                $varb=$_GET['test'];
-                $pruebasql= "update practicap.formaseguro set NPaciente=".$vara.", Compañia=".$varb." where NFormulario=".$varn.";";
-                $prueba1 = $pdo->prepare($pruebasql);
-                $prueba1->execute();
-
-                $gsent = $pdo->prepare($sqldatos);
-                $gsent->execute();
-                $resultado=$gsent->fetchAll();
-
-                foreach ($resultado as $dato){
-                $Numero=$dato['NFormulario'];
-                $NPaciente=$dato['NPaciente'];
-                $NCompS=$dato['Compañia'];
-                $nomPC=$dato['nombre'];
-                $nomCompS=$dato['Nombre'];
-
-                echo "<tr>";
-                    echo '<form action="mformSeg.php" method="GET">';
-                    echo '<th scope="row"><input type="text" name="numero" class="form-control" value="'.$Numero.'"></th>';                
-                    echo '<th scope="row"><select name="test2" id="test2" class="form-control">';
-                    
-                    $sqlnom='select * from practicap.paciente;';
-                    $gsent = $pdo->prepare($sqlnom);
-                    $gsent->execute();
-                    $nom=$gsent->fetchAll();
-                    
-                    echo "<option value='".$NPaciente."'>".$nomPC."</option>";
-                    
-                    foreach ($nom as $vuelta) {
-                        $id=$vuelta["NPaciente"];
-                        $nomP=$vuelta["nombre"];
-                        echo "<option value='".$id."'>".$nomP."</option>";
-                    }                  
-                    echo '</select></th>';
-
-                    echo '<th scope="row"><select name="test" id="test" class="form-control">';
-
-                    $sqlnom='select * from practicap.listadocompanias;';
-                    $gsent = $pdo->prepare($sqlnom);
-                    $gsent->execute();
-                    $nom=$gsent->fetchAll();
-
-                    echo "<option value='".$NCompS."'>".$nomCompS."</option>";
-
-                    foreach ($nom as $vuelta) {
-                        $id=$vuelta["idCompanias"];
-                        $nomP=$vuelta["Nombre"];
-                        echo "<option value='".$id."'>".$nomP."</option>";
-                    }
-
-                    echo '</select></th>';
-                    echo '<th scope="row"><input type="submit" class="btn btn-primary" value="Modificar"</th></form></tr>';
-                };
-                ?>
-
-                </tbody>  
-            </table>
-        </div>
-    </div>
     
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
         crossorigin="anonymous"></script>
-<script src="../js/nuevo.js"></script>
+
+    <script src="js/nuevo.js"></script>
+
 
 </body>
 
