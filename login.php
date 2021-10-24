@@ -1,6 +1,7 @@
 <?php
 
 include_once 'conexion.php';
+//implementacion de login
 
 $user=$_POST["usuario"];
 $pass=$_POST["contra"];
