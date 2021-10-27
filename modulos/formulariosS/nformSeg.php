@@ -122,13 +122,11 @@
         $idComp;
         $NombComp;
 
-
+    
         $NumP=$_GET["FSpas"];
         $NumComp=$_GET['comp'];
 
-        $sql_NPaciente= 'insert into formaseguro (NPaciente,Compañia) values ('.$NumP.','.$NumComp.');';
-        $gsent = $pdo->prepare($sql_NPaciente);
-        $gsent->execute();
+
 
 
 
@@ -191,7 +189,7 @@
                         </div>
                     </div>
                 <div class="row g-3 align-items-center botonG">
-                    <input type="submit" class="btn btn-primary" value="Guardar">
+                    <input type="submit" class="btn btn-primary" id="prt" value="Guardar">
                 </div>
 
             </form>
@@ -218,3 +216,22 @@
 </body>
 
 </html>
+
+
+<?php
+        $sql_comp='select NPaciente from formaseguro where NPaciente='.$NumP.';';
+        $gsent = $pdo->prepare($sql_comp);
+        $gsent->execute();
+        $res=$gsent->fetchAll();
+        foreach($res as $com_dni)
+        $paciente_com=$com_dni['NPaciente'];
+
+        echo $paciente_com;
+        if($paciente_com != $NumP){
+            $sql_NPaciente= 'insert into formaseguro (NPaciente,Compañia) values ('.$NumP.','.$NumComp.');';
+            $gsent = $pdo->prepare($sql_NPaciente);
+            $gsent->execute();
+        }else{
+            echo "<script>alert('El paciente ya tiene una aseguradora asignada');</script>";
+        }
+?>

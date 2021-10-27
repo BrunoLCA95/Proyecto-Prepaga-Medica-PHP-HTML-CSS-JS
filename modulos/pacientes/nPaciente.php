@@ -120,17 +120,13 @@
         include_once ($_SERVER['DOCUMENT_ROOT'].'/ProyectoPP/modulos/conexion.php') ;
         
 
-
-
+        $dDni=0;
         $nPaciente=$_GET["NombreP"];
         $dPaciente=$_GET["DireccionP"];
-
-        $sql_NPaciente= 'insert into paciente (NPaciente,nombre,direccion) values ('.$NumPaciente.',"'.$nPaciente.'","'.$dPaciente.'");';
-        $gsent = $pdo->prepare($sql_NPaciente);
-        $gsent->execute();
+        $dDni=$_GET["Dni"];
 
 
-
+        
         $sql_NPaciente= 'select NPaciente from paciente order by NPaciente desc limit 1;';
         $gsent = $pdo->prepare($sql_NPaciente);
         $gsent->execute();
@@ -138,8 +134,6 @@
         foreach ($resultado as $dato)
         $NumPaciente=$dato['NPaciente'];
         $NumPaciente=$NumPaciente+1;
-
-
 
         ?>
 
@@ -157,6 +151,10 @@
                         <div class="col form-control">
                             <label for="">Direccion del Paciente</label>
                             <input type="text" class="form-control" name="DireccionP">
+                        </div>
+                        <div class="col form-control">
+                            <label for="">DNI del Paciente</label>
+                            <input type="text" class="form-control" name="Dni">
                         </div> 
                     </div>
                     <div class="row g-2 align-items-center">
@@ -194,3 +192,21 @@
 </body>
 
 </html>
+
+<?php
+        $sql_comp='select dni from paciente where dni='.$dDni.';';
+        $gsent = $pdo->prepare($sql_comp);
+        $gsent->execute();
+        $res=$gsent->fetchAll();
+        foreach($res as $com_dni)
+        $dni_com=$com_dni['dni'];
+
+        if($dni_com != $dDni){
+            $sql_NPaciente= 'insert into paciente (nombre,direccion,dni) values ("'.$nPaciente.'","'.$dPaciente.'",'.$dDni.');';
+            $gsent = $pdo->prepare($sql_NPaciente);
+            $gsent->execute();
+        }else{
+            echo "<script>alert('El paciente ya se encuentra registrado');</script>";
+        }
+
+?>
