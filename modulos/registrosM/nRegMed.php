@@ -124,9 +124,39 @@
         $NumMedicoP=$_GET["medico"];
         $NumTipoP=$_GET["tipoExamen"];
 
-        $sql_NPaciente= 'insert into examen (NMedico, NPaciente, TExamen) values ('.$NumMedicoP.','.$Num.','.$NumTipoP.');';
-        $gsent = $pdo->prepare($sql_NPaciente);
+
+        $sqlComErroresM='Select cargo from medico where NMedico="'.$NumMedicoP.'";';
+        $gsent = $pdo->prepare($sqlComErroresM);
         $gsent->execute();
+        $resMErrores=$gsent->fetchAll();
+        foreach ($resMErrores as $dato) {
+            $CatMedico=$dato['cargo'];
+        }
+
+        $sqlComErroresM='Select categoria from catalogotarifa where id="'.$NumTipoP.'";';
+        $gsent = $pdo->prepare($sqlComErroresM);
+        $gsent->execute();
+        $resMErrores=$gsent->fetchAll();
+        foreach ($resMErrores as $dato) {
+            $CatEx=$dato['categoria'];
+        }
+
+        if ($Num != null) {
+            if ($CatMedico != $CatEx) {
+                $sql_NPaciente= 'insert into examen (NMedico, NPaciente, TExamen) values ('.$NumMedicoP.','.$Num.','.$NumTipoP.');';
+                $gsent = $pdo->prepare($sql_NPaciente);
+                $gsent->execute();
+            }else{
+                echo "<script>alert('Este Medico no puede realizar este Examen');</script>";
+            }
+        }
+
+
+
+
+
+
+        
 
         $idMedi;
         $NombMedi;
@@ -141,7 +171,7 @@
         foreach ($resultado2 as $dato1)
         $UltimoReg =$dato1['NExamen'] +1;
 
-        $sql_NPaciente= 'select NMedico,nombre from medico;';
+        $sql_NPaciente= 'select NMedico,nombre,cargo from medico;';
         $gsent = $pdo->prepare($sql_NPaciente);
         $gsent->execute();
         $resultado=$gsent->fetchAll();
@@ -179,7 +209,8 @@
                                 foreach ($resultado as $dato):
                                     $idMedi=$dato['NMedico'];
                                     $NombMedi=$dato['nombre'];
-                                    echo "<option value='".$idMedi."'>$NombMedi</option>";
+                                    $CatM=$dato['cargo'];
+                                    echo "<option value='".$idMedi."'>$NombMedi,$CatM</option>";
 
                                 endforeach;
 
