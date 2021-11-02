@@ -135,6 +135,7 @@
                     <tr>
                     <th scope="col">N° Paciente</th>
                     <th scope="col">Nombre Paciente</th>
+                    <th scope="col">DNI Paciente</th>
                     <th scope="col">Direccion Paciente</th>
                     </tr>
                 </thead>
@@ -160,11 +161,13 @@
                 $Numero=$dato['NPaciente'];
                 $NPaciente=$dato['nombre'];
                 $Direccion=$dato['direccion'];
+                $DNI=$dato['dni'];
 
 
                 echo "<tr>";
                     echo '<th scope="row">'.$Numero.'</th>';
                     echo '<th scope="row">'.$NPaciente.'</th>';
+                    echo '<th scope="row">'.$DNI.'</th>';
                     echo '<th scope="row">'.$Direccion.'</th>';
 
                 echo '</tr>';

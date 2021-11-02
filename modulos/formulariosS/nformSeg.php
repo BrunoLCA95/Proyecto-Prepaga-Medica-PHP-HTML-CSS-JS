@@ -127,6 +127,25 @@
         $NumComp=$_GET['comp'];
 
 
+        $sql_comp='select NPaciente from formaseguro where NPaciente='.$NumP.';';
+        $gsent = $pdo->prepare($sql_comp);
+        $gsent->execute();
+        $res=$gsent->fetchAll();
+        foreach($res as $com_dni)
+        $paciente_com=$com_dni['NPaciente'];
+
+        if($NumP != null){
+            if($paciente_com != $NumP){
+                $sql_NPaciente= 'insert into formaseguro (NPaciente,Compañia) values ('.$NumP.','.$NumComp.');';
+                $gsent = $pdo->prepare($sql_NPaciente);
+                $gsent->execute();
+            }else{
+                echo "<script>alert('El paciente ya tiene una aseguradora asignada');</script>";
+            }
+        }
+
+
+
 
 
 
@@ -219,19 +238,6 @@
 
 
 <?php
-        $sql_comp='select NPaciente from formaseguro where NPaciente='.$NumP.';';
-        $gsent = $pdo->prepare($sql_comp);
-        $gsent->execute();
-        $res=$gsent->fetchAll();
-        foreach($res as $com_dni)
-        $paciente_com=$com_dni['NPaciente'];
 
-        echo $paciente_com;
-        if($paciente_com != $NumP){
-            $sql_NPaciente= 'insert into formaseguro (NPaciente,Compañia) values ('.$NumP.','.$NumComp.');';
-            $gsent = $pdo->prepare($sql_NPaciente);
-            $gsent->execute();
-        }else{
-            echo "<script>alert('El paciente ya tiene una aseguradora asignada');</script>";
-        }
+        
 ?>

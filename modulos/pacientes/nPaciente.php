@@ -126,6 +126,23 @@
         $dDni=$_GET["Dni"];
 
 
+        $sql_comp='select dni from paciente where dni='.$dDni.';';
+        $gsent = $pdo->prepare($sql_comp);
+        $gsent->execute();
+        $res=$gsent->fetchAll();
+        foreach($res as $com_dni)
+        $dni_com=$com_dni['dni'];
+
+        if($nPaciente != null){
+            if($dni_com != $dDni){
+                $sql_NPaciente= 'insert into paciente (nombre,direccion,dni) values ("'.$nPaciente.'","'.$dPaciente.'",'.$dDni.');';
+                $gsent = $pdo->prepare($sql_NPaciente);
+                $gsent->execute();
+            }else{
+                echo "<script>alert('El paciente ya se encuentra registrado');</script>";
+            }
+        }
+
         
         $sql_NPaciente= 'select NPaciente from paciente order by NPaciente desc limit 1;';
         $gsent = $pdo->prepare($sql_NPaciente);
@@ -193,20 +210,3 @@
 
 </html>
 
-<?php
-        $sql_comp='select dni from paciente where dni='.$dDni.';';
-        $gsent = $pdo->prepare($sql_comp);
-        $gsent->execute();
-        $res=$gsent->fetchAll();
-        foreach($res as $com_dni)
-        $dni_com=$com_dni['dni'];
-
-        if($dni_com != $dDni){
-            $sql_NPaciente= 'insert into paciente (nombre,direccion,dni) values ("'.$nPaciente.'","'.$dPaciente.'",'.$dDni.');';
-            $gsent = $pdo->prepare($sql_NPaciente);
-            $gsent->execute();
-        }else{
-            echo "<script>alert('El paciente ya se encuentra registrado');</script>";
-        }
-
-?>
